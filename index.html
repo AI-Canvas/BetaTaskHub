@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Canvas Beta - Weekly Task Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --pink: #ed147d;
+    --orange-warm: #ee6a30;
+    --orange: #f5751e;
+    --purple: #9b0dda;
+    --black: #0a0a0a;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --muted: #7a7a7a;
+    --line: #e5e5e5;
+    --line-soft: #f0f0f0;
+    --bg: #ffffff;
+    --bg-soft: #fafafa;
+    --bg-highlight: #fff7f0;
+    --bg-cool: #f5f8ff;
+    --bg-cool-edge: #4299e1;
+    --bg-warn: #fffaf0;
+    --bg-warn-edge: #ed8936;
+    --gradient-warm: linear-gradient(135deg, var(--pink) 0%, var(--orange-warm) 55%, var(--orange) 100%);
+    --gradient-cool: linear-gradient(135deg, var(--purple) 0%, var(--black) 100%);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 16px 40px rgba(0,0,0,0.12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+/* Top sticky bar */
+nav.topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+}
+.topbar-inner { display: flex; align-items: center; gap: 24px; max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.brand { font-weight: 800; letter-spacing: -0.02em; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+.brand-dot { width: 10px; height: 10px; border-radius: 2px; background: var(--gradient-warm); }
+.topbar-meta { margin-left: auto; font-size: 13px; color: var(--muted); }
+
+/* Hero */
+.hero { padding: 64px 0 40px; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-highlight) 100%); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; top: -180px; right: -180px; width: 440px; height: 440px; border-radius: 50%; background: var(--gradient-warm); opacity: 0.12; filter: blur(80px); }
+.hero::after { content: ""; position: absolute; bottom: -150px; left: -150px; width: 380px; height: 380px; border-radius: 50%; background: var(--gradient-cool); opacity: 0.08; filter: blur(80px); }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink); margin-bottom: 18px; position: relative; z-index: 1; }
+h1 { font-size: 48px; font-weight: 800; letter-spacing: -0.035em; margin: 0 0 18px; line-height: 1.05; position: relative; z-index: 1; }
+h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-sub { font-size: 19px; color: var(--ink-soft); max-width: 820px; margin: 0 0 24px; position: relative; z-index: 1; }
+.hero-meta { display: flex; gap: 32px; flex-wrap: wrap; font-size: 14px; color: var(--muted); position: relative; z-index: 1; padding-top: 24px; border-top: 1px solid var(--line); margin-top: 12px; }
+.hero-meta strong { color: var(--ink); font-weight: 600; }
+
+/* Confidence */
+.confidence-banner { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin: 28px 0 0; box-shadow: var(--shadow-sm); position: relative; z-index: 1; }
+.confidence-banner h4 { margin: 0 0 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pink); }
+.confidence-banner p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+/* Tabs */
+.tabs-bar { display: flex; gap: 4px; margin: 40px 0 0; border-bottom: 2px solid var(--line); position: sticky; top: 56px; background: var(--bg); z-index: 50; padding-bottom: 0; }
+.tab-button {
+    background: none; border: none; padding: 14px 22px;
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    color: var(--ink-soft); cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+    margin-bottom: -2px;
+    letter-spacing: -0.01em;
+}
+.tab-button:hover { color: var(--pink); }
+.tab-button.active { color: var(--pink); border-bottom-color: var(--pink); }
+.tab-button .tab-emoji { display: inline-block; margin-right: 8px; }
+
+.tab-content { display: none; padding: 36px 0; }
+.tab-content.active { display: block; }
+
+/* Track intro card */
+.track-intro {
+    background: white; border-radius: 16px; padding: 28px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 36px;
+}
+.track-intro h2 { margin: 0 0 8px; font-size: 28px; font-weight: 800; letter-spacing: -0.025em; }
+.track-intro h2 .label { display: inline-block; padding: 4px 10px; background: var(--gradient-warm); color: white; border-radius: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: middle; margin-right: 12px; }
+.track-intro p { font-size: 15px; color: var(--ink-soft); margin: 0; }
+
+/* Week section - rendered as <details> for accessible collapse/expand. */
+.week-section {
+    margin-bottom: 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg-soft);
+    overflow: hidden;
+    transition: box-shadow 0.18s, border-color 0.18s;
+}
+.week-section[open] {
+    box-shadow: var(--shadow-md);
+    border-color: var(--orange);
+}
+
+/* The <summary> drives collapse/expand. Hide the default marker. */
+.week-section > summary {
+    list-style: none;
+    cursor: pointer;
+}
+.week-section > summary::-webkit-details-marker { display: none; }
+.week-section > summary::marker { content: ""; }
+
+.week-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    padding: 20px 24px;
+}
+.week-section[open] > summary .week-header {
+    border-bottom: 1px solid var(--line);
+    background: white;
+}
+.week-section > summary:hover .week-header { background: white; }
+.week-header-left { flex: 1; min-width: 280px; }
+.week-num {
+    display: inline-block; padding: 4px 10px;
+    background: white; border: 1px solid var(--pink); color: var(--pink);
+    border-radius: 6px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.week-title { font-size: 22px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.015em; }
+.week-intent { font-size: 14px; color: var(--ink-soft); margin: 0; }
+.week-meta-row {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-top: 10px;
+    font-size: 12px; color: var(--muted);
+}
+.week-meta-row .pill {
+    background: white;
+    border: 1px solid var(--line);
+    padding: 3px 9px; border-radius: 99px;
+    font-weight: 600;
+}
+
+.week-header-right {
+    display: flex; align-items: center; gap: 14px;
+    flex-shrink: 0;
+}
+
+.survey-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px;
+    background: var(--gradient-warm);
+    color: white; text-decoration: none;
+    font-size: 14px; font-weight: 600;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+}
+.survey-link:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.survey-link svg { width: 14px; height: 14px; }
+.survey-link .meta { opacity: 0.85; font-weight: 500; font-size: 12px; }
+
+/* Chevron toggle indicator. */
+.week-toggle {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: transform 0.18s, background 0.15s, border-color 0.15s;
+}
+.week-section > summary:hover .week-toggle {
+    background: var(--bg-highlight);
+    border-color: var(--orange);
+    color: var(--orange);
+}
+.week-toggle svg { width: 14px; height: 14px; transition: transform 0.2s; }
+.week-section[open] .week-toggle svg { transform: rotate(180deg); }
+
+/* Tasks */
+.tasks-container {
+    background: white;
+    padding: 28px;
+}
+
+.task {
+    padding-bottom: 28px; margin-bottom: 28px;
+    border-bottom: 1px dashed var(--line);
+}
+.task:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.task-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+.task-number {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--gradient-warm);
+    color: white;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+}
+.task-title { font-size: 18px; font-weight: 700; margin: 4px 0 0; letter-spacing: -0.01em; flex: 1; }
+.task-time {
+    flex-shrink: 0;
+    font-size: 12px; font-weight: 600;
+    color: var(--muted);
+    background: var(--bg-soft);
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-top: 4px;
+}
+.task-free-badge {
+    flex-shrink: 0;
+    font-size: 11px; font-weight: 700;
+    color: white;
+    background: var(--purple);
+    padding: 4px 10px; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-top: 4px;
+}
+
+.task-block { margin-bottom: 12px; }
+.task-block-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--pink); margin-bottom: 4px;
+}
+.task-block-body { font-size: 14px; color: var(--ink); line-height: 1.55; }
+.task-block-body ul { margin: 6px 0; padding-left: 20px; }
+.task-block-body li { margin-bottom: 4px; }
+
+.task-callout {
+    background: var(--bg-cool);
+    border-left: 3px solid var(--bg-cool-edge);
+    padding: 12px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+}
+.task-callout strong { color: var(--ink); }
+.articulation-callout {
+    background: #fef5e7;
+    border-left-color: #d69e2e;
+}
+
+.watch-for {
+    background: var(--bg-warn);
+    border-left: 3px solid var(--bg-warn-edge);
+    padding: 12px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--ink);
+    margin-top: 12px;
+}
+
+/* End-of-week box */
+.eow-box {
+    margin-top: 24px;
+    padding: 20px 22px;
+    background: linear-gradient(135deg, #fff7f0 0%, #fef5ea 100%);
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+}
+.eow-box strong { color: var(--ink); }
+
+/* SUS notice */
+.sus-notice {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--bg-cool);
+    border-left: 4px solid var(--purple);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.sus-notice strong { color: var(--ink); }
+
+/* Footer */
+footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 40px;
+}
+footer .footer-meta { margin-top: 6px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+    <div class="topbar-inner">
+        <div class="brand"><span class="brand-dot"></span>AI Canvas Beta - Task Hub</div>
+        <div class="topbar-meta">3 tracks &middot; 4 weeks &middot; 12 surveys live</div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container">
+        <div class="eyebrow">AI Canvas in Splunk - Customer Beta</div>
+        <h1>Weekly tasks for <span class="accent">your beta track</span>.</h1>
+        <p class="hero-sub">
+            Find your track below. Each week is collapsed into a short card &mdash; click anywhere
+            on a card to expand it and see that week&rsquo;s tasks. You can open the survey
+            directly from the card&rsquo;s <strong>Open Week N survey</strong> button without
+            expanding. The tasks deliberately don&rsquo;t hand you example prompts &mdash; we want
+            to see how you naturally phrase the work to AI Canvas. In Weeks 1 and 2, the free
+            exploration task is the <em>last</em> task &mdash; you&rsquo;ll warm up on the
+            structured tasks first, then drive your own exploration. In the survey, each
+            task&rsquo;s instructions and its feedback questions are on separate pages: click
+            <em>Next</em> after working a task to answer a few short questions about how it went.
+        </p>
+        <div class="hero-meta">
+            <div><strong>Recording reminder:</strong> screen + audio, upload via Splunk VOC.</div>
+            <div><strong>Environment:</strong> your own production environment, read-only tasks only.</div>
+            <div><strong>Agent mode:</strong> non-trivial SPL searches will ask for your approval.</div>
+        </div>
+        <div class="confidence-banner">
+            <h4>How this hub works</h4>
+            <p>
+                Pick your track tab. Each week is a collapsible card &mdash; click to expand and see
+                the tasks, or jump straight into the survey from the <strong>Open Week N
+                survey</strong> button on the card. The survey holds the same content as this hub
+                plus the per-task feedback questions. The Master Task Guide DOCX in your kit
+                mirrors this hub and is fine for offline reference.
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="tabs-bar">
+        <button class="tab-button active" data-track="sre_observability" onclick="switchTab('sre_observability')"><span class="tab-emoji">&#9881;</span>SRE / DevOps Observability</button><button class="tab-button " data-track="splunk_admin" onclick="switchTab('splunk_admin')"><span class="tab-emoji">&#128296;</span>Splunk Admin</button><button class="tab-button " data-track="soc_security" onclick="switchTab('soc_security')"><span class="tab-emoji">&#128737;</span>SOC / Security Analyst</button>
+    </div>
+
+    <div id="tab-sre_observability" class="tab-content">
+<div class="track-intro">
+<h2><span class="label">Track</span>SRE / DevOps Observability</h2>
+<p>This track tests AI Canvas in Splunk with SAIA 2.0 agent mode for observability workflows in your own production environment. You&#x27;ll use AI Canvas (Search &amp; Reporting &gt; AI Canvas) to compose SPL, investigate log volume and errors, correlate events, and validate AI-generated results against raw data. Every non-trivial search will ask for your explicit permission before running, per agent mode&#x27;s design. Tasks are read-only by design - nothing here will modify your environment.</p>
+</div>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 1</div>
+<h3 class="week-title">Orientation and free exploration</h3>
+<p class="week-intent">Get acquainted with AI Canvas in your environment. No multi-step or correlation work yet - we want a baseline of single-prompt interactions and the permission/drill-back loop.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_4HEYj9H8G6aZwzQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Generate SPL for a known issue</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to surface recent errors in a part of your environment you administer.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open a new AI Canvas. Ask it - in your own words - to help you look at the errors happening in a part of your environment you care about. You decide the scope (which index, sourcetype, service), the time window, and how you want the results broken down. Approve the search when you&#x27;re satisfied with the SPL.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent mode should compose an SPL search using your index/sourcetype, ask for permission to execute, return a grouped result table or visualization, and offer drill-back to raw events. Per Splunk docs, every non-trivial search runs only after your explicit approval.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the SPL correct for your data model? Did the agent default to a reasonable time range, or did it ask? If the result is empty, did the agent suggest a next step?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Source volume anomaly</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to spot indexes or sources whose log volume looks unusual right now versus a recent baseline.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open a new AI Canvas. Describe the volume question in your own words. You pick the baseline window that&#x27;s meaningful for your environment (a day, a week, a month) and the threshold for what counts as unusual. Approve the search when ready.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should compose a volume-comparison query (often using tstats or metadata for performance), ask permission to execute, and return a ranked list of sources with the largest deltas.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent use tstats or metadata commands (efficient) or a raw event search (slow/expensive)? Did it pick a sensible baseline window without being told?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Drill back to raw events</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Take any summary card from the previous three tasks and drill back to the raw events behind it. Confirm the summary matches reality.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">From any of the cards in your canvas, click into the underlying events or ask the agent to show you the raw events that produced the summary. Scan the events. Return to the prior canvas view.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Canvas should display raw events in their original context, alongside the SPL search that produced them. You should be able to return to the prior canvas view in one click. Per the AI Canvas PRD, validating what is beneath a summary is a P1 capability - one-click return from raw data to prior view and context.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Could you see the actual SPL that drove the summary? Did the raw events confirm the summary&#x27;s interpretation, or did you spot a mismatch?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Free exploration</h4>
+<span class="task-free-badge">Free exploration</span>
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Spend 15 uninterrupted minutes using AI Canvas the way you would naturally use it for an observability question you have today. There is no right answer - pick an index, service, deployment, or recent incident and just try it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open Splunk in your production environment. Navigate to Search &amp; Reporting and then AI Canvas. Start a new canvas. Type a natural-language question about something in your environment you actually care about. Let the agent respond. If it proposes a search, approve it or reject it as you would in real work. Repeat with a follow-up prompt if you want.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> AI Canvas should accept the natural-language prompt, propose one or more SPL queries, request your explicit permission to execute any non-trivial search, return results in structured cards, and let you drill back to raw events. Per the SAIA 2.0 docs, executing searches in agent mode requires your explicit permission and may impact SVC consumption.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent ask permission before executing? Did the SPL look syntactically correct against your data? Did the response feel like it understood your environment, or did it return something generic?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 2</div>
+<h3 class="week-title">Deeper agentic workflows and free exploration</h3>
+<p class="week-intent">Move from single-prompt interactions to multi-step agentic workflows. Test the agent&#x27;s ability to chain steps and refine answers through follow-up prompts.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_afJE1vnMw0XGUe2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Multi-step error-to-deploy correlation</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to find your noisiest service right now and then look for a deployment, config change, or other change event nearby that might explain it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Start a new canvas. Describe the two-step investigation in your own words. You pick the time window, the data sources for change events (CI/CD logs, deploy notes, ticket index, whatever your team uses), and the definition of noisy. Approve searches as the agent proposes them.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the SAIA 2.0 docs, agent mode can parse a prompt into parallel tool and skill calls. Expect two related searches (error rate + deploy events) to be proposed and run, with results stitched into a single answer.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent run both searches or only one? Was the correlation actually meaningful, or did it just dump two unrelated results next to each other?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Iterate via follow-up prompts</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Build a search through the agent, then refine it across 3-4 follow-up turns. We want to see how it holds context.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open a new canvas. Ask an opening question about errors or activity in a service or index you care about. Then push it through at least three follow-up turns - narrowing time, changing how it&#x27;s grouped, adding or removing a filter. Phrase each follow-up however feels natural; the point is not the words but whether the agent keeps cumulative context.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Each follow-up should incrementally modify the SPL and ask permission to re-run. The new result should clearly show the change.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Could you see the new SPL each time? Were the changes actually applied, or did the agent quietly drop one of your filters?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Validate AI output against raw</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick the most surprising or counterintuitive result from this week&#x27;s tasks and validate it against raw data.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Find a result from Tasks W2T1-W2T3 that seemed off, or unexpected, or just worth confirming. Drill back to raw events. Read at least 5 actual events. Decide whether the AI&#x27;s summary was accurate.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the AI Canvas PRD P1 capability &#x27;Validate what&#x27;s beneath the summary&#x27;, the canvas should let you view underlying raw results and metadata for any summarized output and return to the prior context in one click.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the summary match the raw events? Was anything hidden (filtered, truncated, paraphrased) that mattered?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Free exploration - your agentic workflow</h4>
+<span class="task-free-badge">Free exploration</span>
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Spend 15 minutes trying any agentic workflow you&#x27;d use for routine ops. Multi-step, follow-up prompts, agent-proposed next steps - anything that goes beyond a single Q-and-A.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a routine ops task: triage a noisy host, follow up on a recent deploy, check the health of a service. Use AI Canvas as your investigation surface. Use follow-up prompts liberally.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should maintain context across prompts in the same canvas. Each follow-up should refine the result without restarting from scratch. Permission should be asked again for any new non-trivial search.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent remember context (index, time range, previous filters)? Were follow-ups faster than starting over manually?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 3</div>
+<h3 class="week-title">Multi-source correlation and long-running steps</h3>
+<p class="week-intent">Test cross-source workflows and long-running steps that don&#x27;t return immediately. This is where the canvas&#x27;s persistence matters most.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~55 min</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_cXXMvWq0i2CZYsS" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Cross-source correlation</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to correlate evidence across two or more indexes/sourcetypes (e.g., application logs + infra metrics, or app errors + access logs).</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">In a new canvas, ask the agent to investigate a scenario that requires looking at two distinct data sources in your environment. Approve searches as needed. Look for whether the agent stitches the evidence into one narrative.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per SAIA 2.0 docs, parallel tool calls are supported. Expect two searches against two indexes, with the agent presenting a stitched view rather than two disconnected tables.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent actually correlate, or just paste two results side-by-side? Did time alignment work?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Optional - ITSI index query (only if you have ITSI)</h4>
+
+<span class="task-time">10 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">If you have ITSI installed, ask AI Canvas to query data inside your ITSI indexes. Important: per Lizzy&#x27;s guidance, AI Canvas can read ITSI indexes but cannot interact with ITSI episodes or invoke ITSI&#x27;s AI skills in the beta - this task is read-only against ITSI&#x27;s underlying data.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">If you don&#x27;t have ITSI, skip this task and mark it &#x27;Skipped&#x27; in the feedback. If you do, ask the agent to query something straightforward from your ITSI indexes.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should query the ITSI index as it would any other Splunk index. Episode-level reasoning or ITSI AI skills are out of scope for the beta.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent know how ITSI&#x27;s data is structured, or did it try generic queries? Did anything fail in a confusing way?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Compose a saved search or dashboard via agent</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to draft an SPL search you would actually save (or a dashboard panel you might add). Note: don&#x27;t actually save it in production unless you want to - the test is the drafting flow, not the persistence.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Describe a saved-search-worthy use case in plain language. Have the agent compose it. Iterate until you&#x27;d be willing to save it. Optionally copy the SPL into a notepad outside Splunk to preserve it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should produce a copy-pastable SPL string and explain the logic. You should be able to iterate via follow-ups.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the SPL production-ready? Did it use efficient commands? Did it explain its choices in a way that would survive a code review?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Track a long-running step</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Start a step that takes a while to complete (a wide time-range search, a heavy correlation) and use the canvas to monitor it while doing other work.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Kick off a search that you know will take a while in your environment - you pick the scope. While it runs, start another question in the same canvas. Observe how the canvas tracks both.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the AI Canvas PRD P1 capability &#x27;Track long-running steps without clutter&#x27;, long-running checks update in-place, no duplicates, with pending/updated/error status and last-checked / next-check timestamps. Per the SAIA 2.0 docs, agent mode supports parallel tool calls.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Could you tell at a glance which step was still running? Did the slow search block the new one, or did they run in parallel?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 4</div>
+<h3 class="week-title">Production reality and critique</h3>
+<p class="week-intent">Use AI Canvas the way you would for real work, then critique it against your usual workflow. This is the week where we want unvarnished feedback.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Final SUS + exit feedback</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_8eqk9XygIHhf0a2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Real-incident-style multi-prompt investigation</h4>
+
+<span class="task-time">20 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick a real ops question from your queue or recent history and investigate it end-to-end in AI Canvas. Use as many prompts as needed.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Choose a question you would actually have to answer this week (a real ticket, a recent incident, a performance question). Use AI Canvas as your investigation surface from start to finish. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should maintain context across many turns, compose searches, ask permission, return structured results, support drill-back, and let you flag or save key findings. Per the PRD, all activity persists with timestamps and authorship.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Where did you find yourself wanting to leave AI Canvas to do something manually? What did it do better than your usual flow? What did it do worse?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Have AI propose next steps - accept or reject with reason</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Get AI Canvas to recommend next investigation steps based on what&#x27;s already in your canvas, and decide which ones you&#x27;d actually act on.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Continuing from W4T1 (or in a fresh canvas with some results in it), ask AI Canvas in your own words to recommend where to look next. For each suggestion it gives, decide: would you actually do that? Capture your reasoning in a notepad alongside.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should propose 2-3 concrete next steps with rationale tied to current evidence. Per the PRD Phase 2 vision, proposals should reference the evidence that prompted them.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Were the proposals concrete (could you act on them) or vague? Did they reference what was already in the canvas? Were they ranked by impact?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Manual versus agentic comparison</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Take a question you&#x27;ve already answered manually this week and ask AI Canvas the same question. Compare time-to-answer, accuracy, and confidence.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a recent investigation where you already know the answer. Ask AI Canvas the same question fresh. Time how long it takes. Compare its answer to yours.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should arrive at a reasonable answer with less manual SPL work on your part. Some answers may be missing nuance you&#x27;d have caught.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the AI&#x27;s answer correct? Was it complete? Was it faster end-to-end (including your verification time)? Would you trust it enough to skip the manual flow next time?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Capture concerns and feedback</h4>
+
+<span class="task-time">10 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Capture anything that bothered you, surprised you, or would block you from using AI Canvas in real work.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Use the open-ended response below to capture concerns. Be specific - &#x27;the SPL was wrong&#x27; is less useful than &#x27;the SPL used eventtype= when there&#x27;s no eventtype in my data, and it didn&#x27;t recover when I told it that&#x27;.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> N/A - this is a reflection task.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Trust failures. Permission flow friction. SVC cost concerns. Errors that the agent didn&#x27;t recover from.</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+<div class="sus-notice"><strong>System Usability Scale (SUS).</strong> Week 4 closes with the standard 10-item SUS questionnaire so we can benchmark AI Canvas against industry usability norms. About 5 minutes.</div>
+</div>
+</details>
+</div>
+<div id="tab-splunk_admin" class="tab-content">
+<div class="track-intro">
+<h2><span class="label">Track</span>Splunk Admin</h2>
+<p>This track tests AI Canvas in Splunk with SAIA 2.0 agent mode for platform administration workflows in your own production environment. You&#x27;ll use AI Canvas (Search &amp; Reporting &gt; AI Canvas) to investigate license usage, index health, knowledge objects, and search head behavior. Every non-trivial search will ask for your explicit permission before running. Tasks are read-only - no settings are modified.</p>
+</div>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 1</div>
+<h3 class="week-title">Orientation and free exploration</h3>
+<p class="week-intent">Get acquainted with AI Canvas in your environment. Establish a baseline of single-prompt admin queries and the permission loop.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_80a6Hu4RD7ANaCO" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">License usage trend</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to summarize recent license usage trends for your environment.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">In your own words, ask AI Canvas to help you look at license consumption over a recent window. You pick the window and the breakdown that&#x27;s most useful (by source, by sourcetype, by host - your call). Approve the search.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should query the _internal index for license usage (license_usage.log via index=_internal source=*license_usage.log* or similar), aggregate by day, and return a trend.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent use the right log source? Did it know the conventional license_usage SPL pattern?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Index growth anomaly</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to find indexes whose size or event count looks off versus their normal pattern.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Ask AI Canvas - in your own words - to help you find indexes that look off. You decide the baseline and what counts as significant change. Approve the search.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should use dbinspect, metadata, or _internal queries (depending on what&#x27;s accessible) to compare growth against a baseline and return a ranked list.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it use efficient commands like tstats or dbinspect, or did it walk raw events? Did it pick a reasonable baseline window?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Drill back from a summary</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick a summary card from the previous tasks and drill back to verify the underlying data.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">From any card in your canvas, drill into the raw events or look at the SPL the agent used. Confirm the summary matches.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P1 capability, you should be able to view the underlying SPL and raw events for any AI-generated summary and return to context in one click.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the SPL inspectable? Was it editable if you wanted to tweak it?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Free exploration</h4>
+<span class="task-free-badge">Free exploration</span>
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Spend 15 minutes using AI Canvas the way you&#x27;d naturally use it for an admin question. Pick any admin question you have today.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open AI Canvas. Type an admin-flavored question - license usage, index health, search performance, user activity, anything. Approve searches as needed.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should compose admin-relevant SPL (often against the _internal, _audit, or _introspection indexes), request permission, and return structured results.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent know which internal indexes to use? Did the SPL feel admin-aware, or did it default to user-data indexes?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 2</div>
+<h3 class="week-title">Deeper agentic admin workflows</h3>
+<p class="week-intent">Multi-step admin investigations and follow-up refinement.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3QML9cHmOlxXY6G" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Search head or indexer health investigation</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to investigate the health of your search heads or indexers right now.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Ask AI Canvas in your own words to help you check on search head or indexer health. You pick which tier you want to look at and which dimensions matter to you (queues, concurrency, CPU, memory, disk - whatever you usually watch). Approve searches as proposed.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should query _introspection or _internal for the relevant metrics and return a structured view.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it know about _introspection? Did the metric interpretation match your domain knowledge?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Stale or unused saved searches</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to surface saved searches that look stale - haven&#x27;t run recently, or have been failing.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Describe the audit you want in your own words. You decide what counts as stale (30 days, 60 days, never succeeded) and what you want to see (owners, apps, last-run timestamp). Approve searches.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should query the audit log or rest endpoints for saved-search execution history.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it use audit logs correctly? Did it surface actionable owners (who created the search)?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Iterate on an admin search</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Build an admin search through the agent and refine it across 3 follow-up turns.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open a new canvas. Ask an opening admin question - could be about user activity, search performance, schedule load, anything. Then push it through three follow-ups, narrowing or pivoting however feels natural. Phrase the follow-ups however you would in a real investigation.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Each follow-up should modify the SPL and re-run with permission.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent keep cumulative context, or restart with each prompt? Did the SPL stay efficient?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Free exploration - your admin agentic workflow</h4>
+<span class="task-free-badge">Free exploration</span>
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Spend 15 minutes trying an agentic workflow you would use for routine admin work. Multi-step, follow-ups, agent-proposed next steps.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a routine admin task: license audit, indexer health, capacity check. Use AI Canvas with follow-up prompts liberally.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should maintain context across prompts and refine results through follow-ups.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did follow-ups feel faster than starting over? Did the agent surface the right next thing to check?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 3</div>
+<h3 class="week-title">Capacity forecasting and knowledge object audits</h3>
+<p class="week-intent">Test the agent on higher-judgment admin tasks: forecasting, audits, dashboard drafting.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1Mm1qw045n1fzts" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Capacity forecasting</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to project a capacity trend into the near future based on recent data.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Describe the capacity question you actually have today (license, disk, ingest, something else) and the horizon you care about. Ask AI Canvas to forecast it. Look at the method and the uncertainty as much as the number.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent may use predict or similar SPL forecasting commands, or summarize a trend and project linearly.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it explain its forecasting method? Did it flag uncertainty? Would you trust this for a capacity conversation with leadership?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Knowledge object audit - duplicates and conflicts</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to find duplicate or conflicting macros, lookups, or eventtypes.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Ask the agent to audit knowledge objects for duplicates, near-duplicates, or potentially conflicting definitions.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should query the appropriate REST endpoint or knowledge-object listing and compare definitions.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Could the agent actually access the REST endpoints? Did it produce a useful list, or just say &#x27;I can&#x27;t&#x27;?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Dashboard draft for index health</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to draft a dashboard (panels and SPL) for daily index-health monitoring. Don&#x27;t necessarily save it - we&#x27;re testing the drafting flow.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Describe a dashboard you&#x27;d want for daily index health. Have the agent compose panels. Iterate.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should produce panel SPL plus dashboard XML or Studio JSON, with explanations.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the output paste-able? Did the panels actually work when you tried to render them?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Long-running audit task</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Kick off a long-running audit (e.g., user-access audit over the last 30 days) and use the canvas to monitor it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Start the long search. While it runs, ask the agent another admin question. Observe how the canvas tracks both.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P1 long-running step capability, canvas should track both with status, last-checked, and next-check info.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Could you tell which step was still running? Did the slow audit block other interactions?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 4</div>
+<h3 class="week-title">Production reality and critique</h3>
+<p class="week-intent">Use AI Canvas for real admin work and critique it against your usual workflow.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Final SUS + exit feedback</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3l8KQCVvQGFgYmi" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Real admin investigation in your environment</h4>
+
+<span class="task-time">20 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick a real admin question from your queue and investigate it end-to-end in AI Canvas.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Use AI Canvas as your investigation surface. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should maintain multi-turn context and let you drill back, flag findings, and iterate.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Where did the agent fall short? Where did it outperform your manual flow?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Have AI propose remediation steps</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to propose remediation for an admin issue you&#x27;ve identified. Read-only - do not actually execute remediations against production.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Take a finding from W4T1 (or a known admin issue). Ask the agent what it would recommend. Note: per the PRD, agents propose but do not auto-execute high-risk actions. Walk through each proposal with critical eye.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should propose remediations with explanations tied to evidence, not auto-execute anything.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Were the proposals actionable or vague? Did they reference the actual evidence in the canvas?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Manual versus agentic comparison</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick an admin question you already answered manually and ask AI Canvas the same. Compare.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Use the same question fresh in AI Canvas. Time the interaction. Compare the answer to your manual one.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should arrive at a reasonable answer with less manual SPL work on your part.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was it faster end-to-end including verification? Would you skip the manual flow next time?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Capture concerns and feedback</h4>
+
+<span class="task-time">10 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Capture concerns, surprises, or blockers.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Be specific - &#x27;the SPL was wrong&#x27; is less useful than &#x27;the SPL didn&#x27;t filter by index, so it ran against everything and the cost concerned me&#x27;.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> N/A - reflection task.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Trust failures. Permission/SVC concerns. Errors that didn&#x27;t recover.</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+<div class="sus-notice"><strong>System Usability Scale (SUS).</strong> Week 4 closes with the standard 10-item SUS questionnaire so we can benchmark AI Canvas against industry usability norms. About 5 minutes.</div>
+</div>
+</details>
+</div>
+<div id="tab-soc_security" class="tab-content">
+<div class="track-intro">
+<h2><span class="label">Track</span>SOC / Security Analyst</h2>
+<p>This track tests AI Canvas in Splunk with SAIA 2.0 agent mode for security investigation workflows in your own production environment. You&#x27;ll use AI Canvas (Search &amp; Reporting &gt; AI Canvas) to triage alerts, enrich entities, build incident timelines, and propose response actions. Per the AI Canvas PRD, the canvas is designed around human-in-the-loop approval for any action - we will not auto-execute SOAR, Cisco actions, or any containment without your explicit approval. Tasks are read-only or propose-only - no actual containment is executed.</p>
+</div>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 1</div>
+<h3 class="week-title">Orientation and free exploration</h3>
+<p class="week-intent">Get acquainted with AI Canvas for triage. Establish a baseline of single-prompt security interactions.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_0IMNC8EequlZq4u" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Alert triage</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to help you triage what&#x27;s high-severity in your environment right now.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">In your own words, ask AI Canvas to surface the high-severity activity worth your attention. You decide what &#x27;high-severity&#x27; means in your environment, what time window to look at, and how you want it broken down. Approve the search.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should query the appropriate notable or detection index, aggregate by category, and return a ranked view.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it understand the difference between a notable event and a raw alert? Did it pick a sensible time window?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Enrich one entity</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick one entity (user, IP, domain, host) from W1T2 and use AI Canvas to build context around it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick an entity. Ask AI Canvas - however you&#x27;d ask a teammate - to help you understand what&#x27;s happening with that entity. You decide what context matters (recent activity, associations, geo, history). Approve searches.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should run multiple parallel searches against different indexes/sourcetypes to gather context. Per the AI Canvas PRD P0 capability, enrichment results render as structured cards with attribution.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it pull from multiple indexes (auth, network, endpoint)? Did it summarize a coherent picture, or dump raw search results?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Drill back from a summary</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Take any AI-generated summary from this week and validate it against raw events.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Drill back from a summary card to raw events. Read the actual events. Decide whether the summary is accurate.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P1 capability &#x27;Validate what&#x27;s beneath the summary&#x27;, canvas should expose underlying SPL and raw events with one-click return to context.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the summary accurately reflect the raw data? Did the agent paraphrase anything that changed the meaning?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Free exploration</h4>
+<span class="task-free-badge">Free exploration</span>
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Spend 15 minutes using AI Canvas to investigate a recent alert, event, or hunch in your environment.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Open AI Canvas. Pick an alert from your queue or a recent investigation question. Type a natural-language prompt. Approve searches as needed.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should compose security-relevant SPL (often against the index=notable, index=main with auth or security sourcetypes, or your detection indexes), request permission, and return structured results.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the agent know which indexes are security-relevant in your environment? Did it default to ES data model queries if you have ES?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 2</div>
+<h3 class="week-title">Deeper agentic security workflows</h3>
+<p class="week-intent">Multi-step triage and an introduction to SOAR action proposals with human-in-the-loop approval.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_79uWzYrXpNLFIb4" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Multi-step alert triage</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick one notable event and let AI Canvas chain through multiple queries to build full triage context for you.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a notable event from your queue. Ask AI Canvas to help you triage it - phrase it however you would naturally describe the work to a teammate. Use follow-ups to push the agent deeper where you&#x27;d normally dig.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per SAIA 2.0 docs, agent mode parses one prompt into parallel tool/skill calls. Expect 3-4 related searches to be proposed and run, with results combined into one triage narrative.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">How many searches did it propose? Were they relevant? Did the final narrative add value beyond the sum of the searches?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Propose a SOAR action (HITL approval required)</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Have AI Canvas propose a SOAR or response action for an entity in your investigation. Per the PRD, human-in-the-loop confirmation is required before ANY action is taken. Do not actually execute. Walk through the approve/adjust/reject flow.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick an entity from W2T2. Ask the agent what action it would recommend. Look at the parameters (scope, target, risk). Decide whether you&#x27;d approve. Do NOT actually approve in production - just walk the flow.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P0 use case &#x27;Engage Existing Automation Tools&#x27;, agent should show the action, parameters (scope, target, duration), and risk justification BEFORE execution. Approve/Adjust/Reject must be available. No action runs without explicit approval. Note: this capability is part of the PRD vision; not all of it may be implemented in the current beta. If it&#x27;s not, capture that as feedback.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the proposed action clearly described? Could you see what would change, on whom, and for how long? Was the rationale tied to evidence in the canvas?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Reference an AI suggestion&#x27;s underlying evidence</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">For any AI-generated suggestion or finding, confirm you can see the evidence behind it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a suggestion from W2T1-W2T3. Ask the agent to show the evidence and reasoning. Drill into raw data to confirm.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD vision of explainable AI, suggestions should link to evidence with attribution. You should be able to see the searches and raw events that informed the suggestion.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the evidence chain clear? Was anything cited that you couldn&#x27;t actually find when you drilled in?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Free exploration - agentic threat hunting</h4>
+<span class="task-free-badge">Free exploration</span>
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Spend 15 minutes trying an agentic threat-hunting prompt. Multi-step, exploratory, hypothesis-driven.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a threat hypothesis you&#x27;ve been wanting to investigate. Use follow-up prompts to refine. Let the agent propose where to look next.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should propose searches across multiple data sources, ask permission to run them, and stitch results.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did it ask the right questions back? Did it surface anomalies you wouldn&#x27;t have found manually?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 3</div>
+<h3 class="week-title">Multi-source correlation and long-running steps</h3>
+<p class="week-intent">Test the canvas&#x27;s ability to handle multi-source security correlations and async/long-running enrichments.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~55 min</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1zgKHm72yDcLMZU" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Multi-source security correlation</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to correlate evidence across at least two security data sources (e.g., auth + endpoint, or network + identity).</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pose a question that requires looking at two distinct data sources. Approve searches. Look for whether the agent ties them together meaningfully.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should run parallel queries against both indexes and synthesize a combined view, not just paste two tables side by side.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Did the time alignment work? Did the entity matching across sources actually link the same user/host?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Long-running enrichment</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Kick off an enrichment that takes a while to return (e.g., a 30-day historical lookup or a wide IOC sweep). Use the canvas to track it while you work on something else.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Start a long search. While it runs, ask the agent another question in the same canvas. Observe both step statuses.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P1 capability &#x27;Track long-running steps without clutter&#x27;, updates should land in place with pending/updated/error status, last-checked, and next-check times.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the long step visible while you worked? Did the result fold back in cleanly when it finished?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Flag key findings to revisit</h4>
+
+<span class="task-time">10 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Mark 2-3 key findings from this week as &#x27;important&#x27; so you can return to them quickly later.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">From your canvases this week, flag the findings that matter most. Then re-open them as if you were returning to the investigation tomorrow.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P1 capability &#x27;Keep track of what matters&#x27;, users should be able to mark any investigation object as important and view flagged items collectively.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was flagging discoverable? Could you find your flagged items again easily?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Agent proposes next investigation steps</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Get AI Canvas to recommend next investigation steps based on the evidence already in your canvas, and decide which you&#x27;d act on.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Continuing from any active canvas this week, ask AI Canvas - in your own words - to recommend where to look next. For each suggestion, engage critically: would you actually do that, and why or why not?</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD Phase 2 vision, proposals should reference evidence in the canvas and explain rationale.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Were proposals actionable? Did they reference the evidence in front of you? Did they prioritize?</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+</div>
+</details>
+<details class="week-section">
+<summary>
+<div class="week-header">
+<div class="week-header-left">
+<div class="week-num">Week 4</div>
+<h3 class="week-title">Production reality and critique</h3>
+<p class="week-intent">Use AI Canvas the way you would for a real incident. Critique everything.</p>
+<div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Final SUS + exit feedback</span></div>
+</div>
+<div class="week-header-right">
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_7UNKk1nLN0MFXlI" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
+</div>
+</div>
+</summary>
+<div class="tasks-container">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Full incident-style investigation</h4>
+
+<span class="task-time">20 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick a recent or active investigation and run it end-to-end in AI Canvas.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Use AI Canvas as your full investigation surface. Drive it with multi-turn prompts, drill back, flag findings, propose next steps. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should maintain multi-turn context, run searches with permission, support drill-back and flagging, and let you arrive at a disposition with audit trail.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Where did the canvas fall short of your usual flow? Where did it outperform?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">High-risk action proposal - approve or reject with reason</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Have the agent propose a high-risk action (containment, user disable, host isolation). Walk through the approve/reject decision. Do NOT actually execute.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Pick a finding from W4T1. Ask the agent what it would recommend. Look at the proposed action&#x27;s scope, target, and risk justification. Decide whether you&#x27;d approve in real life. Reject for testing purposes.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Per the PRD P2 use case &#x27;Keep humans over the line&#x27;, agent must propose only, with reasoning and evidence linked. No high-risk action runs without explicit user approval.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was the action clearly scoped? Was the reasoning tied to specific evidence? Did the approval flow feel safe enough that you&#x27;d trust it on a busy day?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Manual versus agentic comparison</h4>
+
+<span class="task-time">15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Pick a recent investigation you ran manually. Run the same one in AI Canvas. Compare.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Same question, fresh canvas. Time the interaction. Compare the answer.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> Agent should arrive at a reasonable answer with less manual SPL work.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Was it faster end-to-end including verification? Would you trust it enough to skip the manual flow?</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Capture concerns and feedback</h4>
+
+<span class="task-time">10 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Capture trust failures, surprises, blockers.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Instructions</div>
+<div class="task-block-body">Be specific. Examples: &#x27;the agent confidently said X but the evidence said Y&#x27;, or &#x27;I needed to approve 8 searches in 5 minutes - the friction killed the flow&#x27;.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> Use your own technical language. Pick the indexes, sourcetypes, services, users, time windows, and breakdowns that actually fit your environment. Don&#x27;t worry about phrasing it perfectly - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Expected behavior</div>
+<div class="task-callout"><strong>What you should see.</strong> N/A - reflection task.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Watch for</div>
+<div class="watch-for">Hallucinated entities. Searches that touched data you didn&#x27;t expect. Cases where you&#x27;d want a step-up approval that wasn&#x27;t there.</div>
+</div>
+</div>
+<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
+<div class="sus-notice"><strong>System Usability Scale (SUS).</strong> Week 4 closes with the standard 10-item SUS questionnaire so we can benchmark AI Canvas against industry usability norms. About 5 minutes.</div>
+</div>
+</details>
+</div>
+</div>
+
+<footer>
+    AI Canvas in Splunk - Customer Beta Program
+    <div class="footer-meta">
+        Maral Elliott, Principal Mixed Methods Researcher, Splunk AI Org &middot;
+        Lizzy Li, Canvas PM &middot;
+        Built for the Splunk VOC program
+    </div>
+</footer>
+
+<script>
+function switchTab(trackId) {
+    document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.track === trackId);
+    });
+    document.querySelectorAll('.tab-content').forEach(div => {
+        div.classList.toggle('active', div.id === 'tab-' + trackId);
+    });
+    window.scrollTo({top: document.querySelector('.tabs-bar').offsetTop - 60, behavior: 'smooth'});
+    history.replaceState(null, '', '#' + trackId);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const initial = (location.hash || '#sre_observability').slice(1);
+    const btn = document.querySelector(`.tab-button[data-track="${initial}"]`);
+    if (btn) {
+        switchTab(initial);
+    } else {
+        switchTab('sre_observability');
+    }
+});
+</script>
+</body>
+</html>
