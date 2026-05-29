@@ -1977,9 +1977,14 @@ function switchTab(trackId, scroll = true) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Never let a restored scroll position or a leftover #track hash pull the
+    // page down on load - always open at the top (hero).
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const initial = (location.hash || '#sre_observability').slice(1);
     const btn = document.querySelector(`.tab-button[data-track="${initial}"]`);
     switchTab(btn ? initial : 'sre_observability', false);
+    history.replaceState(null, '', location.pathname + location.search);
+    window.scrollTo({ top: 0, behavior: 'instant' });
 });
 </script>
 </body>
