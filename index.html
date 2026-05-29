@@ -1960,25 +1960,26 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 </footer>
 
 <script>
-function switchTab(trackId) {
+function switchTab(trackId, scroll = true) {
     document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.track === trackId);
     });
     document.querySelectorAll('.tab-content').forEach(div => {
         div.classList.toggle('active', div.id === 'tab-' + trackId);
     });
-    window.scrollTo({top: document.querySelector('.tabs-bar').offsetTop - 60, behavior: 'smooth'});
-    history.replaceState(null, '', '#' + trackId);
+    // Only scroll + rewrite the URL hash on an explicit tab click. On initial
+    // page load we skip this so the page opens at the top (hero), not snapped
+    // down to the tab bar.
+    if (scroll) {
+        window.scrollTo({top: document.querySelector('.tabs-bar').offsetTop - 60, behavior: 'smooth'});
+        history.replaceState(null, '', '#' + trackId);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const initial = (location.hash || '#sre_observability').slice(1);
     const btn = document.querySelector(`.tab-button[data-track="${initial}"]`);
-    if (btn) {
-        switchTab(initial);
-    } else {
-        switchTab('sre_observability');
-    }
+    switchTab(btn ? initial : 'sre_observability', false);
 });
 </script>
 </body>
