@@ -74,6 +74,44 @@ h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; ba
 .confidence-banner h4 { margin: 0 0 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pink); }
 .confidence-banner p { margin: 0; font-size: 14px; color: var(--ink-soft); }
 
+/* Record & upload how-to (video + written steps) */
+.howto {
+    background: white; border: 1px solid var(--line); border-radius: 16px;
+    padding: 24px; margin: 28px 0 0; box-shadow: var(--shadow-sm);
+    position: relative; z-index: 1;
+}
+.howto-head { margin: 0 0 18px; }
+.howto-head h4 { margin: 0 0 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pink); }
+.howto-head p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+.howto-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.howto-video { width: 100%; border-radius: 12px; border: 1px solid var(--line); box-shadow: var(--shadow-md); background: #000; display: block; }
+.howto-video-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+.howto-steps { margin: 0; padding: 0; counter-reset: step; list-style: none; }
+.howto-steps li { position: relative; padding: 0 0 14px 38px; font-size: 14px; color: var(--ink-soft); }
+.howto-steps li:last-child { padding-bottom: 0; }
+.howto-steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--gradient-warm); color: white;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+}
+.howto-steps li strong { color: var(--ink); font-weight: 600; }
+.howto-steps a { color: var(--pink); font-weight: 600; }
+.howto-upload { margin: 16px 0 0; padding: 12px 14px; background: var(--bg-highlight); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; color: var(--ink-soft); }
+.howto-upload a { color: var(--pink); font-weight: 600; word-break: break-all; }
+.howto-embed { margin-top: 14px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
+.howto-embed > summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--pink); list-style: none; }
+.howto-embed > summary::-webkit-details-marker { display: none; }
+.howto-embed > summary::before { content: "\25B8"; display: inline-block; margin-right: 8px; transition: transform 0.15s; }
+.howto-embed[open] > summary::before { transform: rotate(90deg); }
+.howto-embed-frame { width: 100%; height: 540px; border: 1px solid var(--line); border-radius: 10px; margin-top: 12px; background: #fff; display: block; }
+.howto-embed-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+@media (max-width: 760px) {
+    .howto-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
 /* Tabs */
 .tabs-bar { display: flex; gap: 4px; margin: 40px 0 0; border-bottom: 2px solid var(--line); position: sticky; top: 56px; background: var(--bg); z-index: 50; padding-bottom: 0; }
 .tab-button {
@@ -332,10 +370,40 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
             task&rsquo;s instructions and its feedback questions are on separate pages: click
             <em>Next</em> after working a task to answer a few short questions about how it went.
         </p>
-        <div class="hero-meta">
-            <div><strong>Recording reminder:</strong> screen + audio while you work the tasks.</div>
-            <div><strong>Upload your recording:</strong> <a href="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879" target="_blank" rel="noopener noreferrer">secure Box upload link</a>, or email your file to <a href="mailto:Beta_Fi.62liqrzggkurgqsp@u.box.com">Beta_Fi.62liqrzggkurgqsp@u.box.com</a>.</div>
-            <div><strong>Agent mode:</strong> non-trivial SPL searches will ask for your approval.</div>
+        <div class="howto">
+            <div class="howto-head">
+                <h4>Record &amp; upload your session</h4>
+                <p>A short walkthrough, with the written steps beside it. Record your screen <em>and</em> audio while you work the tasks.</p>
+            </div>
+            <div class="howto-grid">
+                <div>
+                    <video class="howto-video" controls preload="metadata" playsinline>
+                        <source src="HowTo_Record_W1.mp4" type="video/mp4">
+                        Your browser doesn&rsquo;t support embedded video &mdash;
+                        <a href="HowTo_Record_W1.mp4">download the walkthrough</a> instead.
+                    </video>
+                    <p class="howto-video-note">No sound needed to follow along &mdash; every step is written out beside the video.</p>
+                </div>
+                <div>
+                    <ol class="howto-steps">
+                        <li><strong>Record screen + audio.</strong> Use your built-in recorder &mdash; macOS: <strong>Shift + Cmd + 5</strong>; Windows: <strong>Win + Alt + R</strong> (Xbox Game Bar). Capture your screen and your voice as you work the tasks.</li>
+                        <li><strong>Name the file</strong> with your name, your track, and week, e.g. <strong>maral-elliott_SOC_week1</strong>.</li>
+                        <li><strong>Open the Box link, drag your file in, and add your email.</strong></li>
+                        <li><strong>Check the consent box and hit Submit.</strong></li>
+                        <li><strong>Wait for the success screen</strong> &mdash; &ldquo;Success! Your file has been submitted.&rdquo; Large files take a few minutes, so keep the window open until you see it.</li>
+                    </ol>
+                    <details class="howto-embed" open>
+                        <summary>upload right here, without leaving the hub</summary>
+                        <iframe class="howto-embed-frame"
+                                src="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879"
+                                title="Secure Box upload" loading="lazy"></iframe>
+                        <p class="howto-embed-note">If this panel shows &ldquo;refused to connect,&rdquo; just use the secure Box link below &mdash; it opens the same form in a new tab.</p>
+                    </details>
+                    <div class="howto-upload">
+                        <strong>or Upload here:</strong> <a href="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879" target="_blank" rel="noopener noreferrer">secure Box upload link</a>, or email your file to <a href="mailto:Beta_Fi.62liqrzggkurgqsp@u.box.com">Beta_Fi.62liqrzggkurgqsp@u.box.com</a>.
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="confidence-banner">
             <h4>How this hub works</h4>
