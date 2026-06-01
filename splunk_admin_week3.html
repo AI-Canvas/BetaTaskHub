@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Canvas BetaTest - Task Review</title>
+<title>AI Canvas BetaTest - Splunk_Admin - Week 3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -384,51 +384,112 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <nav class="topbar">
     <div class="topbar-inner">
         <div class="brand"><span class="brand-dot"></span>AI Canvas BetaTest &middot; Internal Review</div>
-        <div class="topbar-meta">3 tracks &middot; 4 weeks &middot; task review</div>
+        <div class="topbar-meta">Splunk Admin &middot; Week 3</div>
     </div>
 </nav>
 <header class="hero">
 <div class="container">
-<div class="eyebrow">AI Canvas in Splunk - Internal Task Review</div>
-<h1>Review the weekly <span class="accent">beta tasks</span>.</h1>
-<p class="hero-sub">A pre-launch read-through for SOC analysts, admins, and SREs. Pick your track, open each week, and check that the tasks make sense before we put this in front of customers. Each week opens its own page with the intro, the recording walkthrough, and the tasks exactly as participants will see them &mdash; minus the feedback questions.</p>
-<div class="review-banner"><h4>What we need from you</h4><p>Go through your track's four weeks. Flag tasks that are confusing, redundant, out of scope for your environment, or missing something. No data is collected here &mdash; send notes straight to Maral.</p></div>
+<div class="page-head">
+<a class="bt-back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>All weeks</a>
+<div class="eyebrow">Splunk Admin &middot; Week 3</div>
+<h1>Capacity forecasting and knowledge object audits</h1>
+<p class="hero-sub">Test the agent on higher-judgment admin tasks: forecasting, audits, dashboard drafting.</p>
+</div>
+<div class="review-banner"><h4>Internal review</h4><p>This page mirrors what a beta participant sees for this week &mdash; the intro and the tasks &mdash; without the feedback questions. Please work through the tasks for your track and flag anything that doesn't make sense, is missing, or wouldn't work in your environment.</p></div>
 </div>
 </header>
 <div class="container">
-<div class="tabs-bar">
-<button class="tab-button active" data-track="sre_observability" onclick="switchTab('sre_observability')"><span class="tab-emoji">&#9881;</span>SRE / DevOps Observability</button><button class="tab-button " data-track="splunk_admin" onclick="switchTab('splunk_admin')"><span class="tab-emoji">&#128296;</span>Splunk Admin</button><button class="tab-button " data-track="soc_security" onclick="switchTab('soc_security')"><span class="tab-emoji">&#128737;</span>SOC / Security Analyst</button>
+<div class="bt-intro">
+<div class="bt-callout how"><strong>How this works.</strong> This week is about one hour of tasks. For each task you&#x27;ll see the goal and what to do — but not a specific prompt to type. There&#x27;s no right or wrong way to prompt the AI. Phrase each task however feels natural and see how AI Canvas responds. If AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+<div class="bt-callout rec"><strong>Record your screen.</strong> In the live beta, participants screen-record (with audio) while they work, then upload the file via a secure Box link. The short walkthrough below is the same one they&#x27;ll get.</div>
 </div>
-<div id="tab-sre_observability" class="tab-content">
-<div class="track-intro">
-<h2><span class="label">Track</span>SRE / DevOps Observability</h2>
-<p>This track tests AI Canvas in Splunk with SAIA 2.0 agent mode for observability workflows in your own production environment. You&#x27;ll use AI Canvas (Search &amp; Reporting &gt; AI Canvas) to compose SPL, investigate log volume and errors, correlate events, and validate AI-generated results against raw data. Every non-trivial search will ask for your explicit permission before running, per agent mode&#x27;s design. Tasks are read-only by design - nothing here will modify your environment.</p>
+<div class="bt-video-wrap">
+<video class="bt-video" controls preload="metadata" playsinline poster=""><source src="HowTo_Record_W1.mp4" type="video/mp4">Your browser can't play this video. <a href="HowTo_Record_W1.mp4">Download the walkthrough</a> instead.</video>
 </div>
-<div class="week-card"><div class="week-num">Week 1</div><h3 class="week-title">Orientation and free exploration</h3><p class="week-intent">Get acquainted with AI Canvas in your environment. No multi-step or correlation work yet - we want a baseline of single-prompt interactions and the permission/drill-back loop.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div><a class="survey-link" href="sre_observability_week1.html">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 2</div><h3 class="week-title">Deeper agentic workflows and free exploration</h3><p class="week-intent">Move from single-prompt interactions to multi-step agentic workflows. Test the agent&#x27;s ability to chain steps and refine answers through follow-up prompts.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div><a class="survey-link" href="sre_observability_week2.html">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 3</div><h3 class="week-title">Multi-source correlation and long-running steps</h3><p class="week-intent">Test cross-source workflows and long-running steps that don&#x27;t return immediately. This is where the canvas&#x27;s persistence matters most.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~55 min</span></div><a class="survey-link" href="sre_observability_week3.html">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 4</div><h3 class="week-title">Production reality and critique</h3><p class="week-intent">Use AI Canvas the way you would for real work, then critique it against your usual workflow. This is the week where we want unvarnished feedback.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span></div><a class="survey-link" href="sre_observability_week4.html">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
+<div class="bt-section-label">4 tasks &middot; about one hour</div>
+<div class="tasks-page">
+<div class="task">
+<div class="task-header">
+<div class="task-number">1</div>
+<h4 class="task-title">Task 1 of 4: Capacity forecasting</h4>
+
+<span class="task-time">~15 min</span>
 </div>
-<div id="tab-splunk_admin" class="tab-content">
-<div class="track-intro">
-<h2><span class="label">Track</span>Splunk Admin</h2>
-<p>This track tests AI Canvas in Splunk with SAIA 2.0 agent mode for platform administration workflows in your own production environment. You&#x27;ll use AI Canvas (Search &amp; Reporting &gt; AI Canvas) to investigate license usage, index health, knowledge objects, and search head behavior. Every non-trivial search will ask for your explicit permission before running. Tasks are read-only - no settings are modified.</p>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Use AI Canvas to project a capacity trend into the near future based on recent data.</div>
 </div>
-<div class="week-card"><div class="week-num">Week 1</div><h3 class="week-title">Orientation and free exploration</h3><p class="week-intent">Get acquainted with AI Canvas in your environment. Establish a baseline of single-prompt admin queries and the permission loop.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div><a class="survey-link" href="splunk_admin_week1.html">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 2</div><h3 class="week-title">Deeper agentic admin workflows</h3><p class="week-intent">Multi-step admin investigations and follow-up refinement.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div><a class="survey-link" href="splunk_admin_week2.html">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 3</div><h3 class="week-title">Capacity forecasting and knowledge object audits</h3><p class="week-intent">Test the agent on higher-judgment admin tasks: forecasting, audits, dashboard drafting.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span></div><a class="survey-link" href="splunk_admin_week3.html">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 4</div><h3 class="week-title">Production reality and critique</h3><p class="week-intent">Use AI Canvas for real admin work and critique it against your usual workflow.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span></div><a class="survey-link" href="splunk_admin_week4.html">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
+<div class="task-block">
+<div class="task-block-label">What to do</div>
+<div class="task-block-body">Describe the capacity question you actually have today (license, disk, ingest, something else) and the horizon you care about. Ask AI Canvas to forecast it. Look at the method and the uncertainty as much as the number.</div>
 </div>
-<div id="tab-soc_security" class="tab-content">
-<div class="track-intro">
-<h2><span class="label">Track</span>SOC / Security Analyst</h2>
-<p>This track tests AI Canvas in Splunk with SAIA 2.0 agent mode for security investigation workflows in your own production environment. You&#x27;ll use AI Canvas (Search &amp; Reporting &gt; AI Canvas) to triage alerts, enrich entities, build incident timelines, and propose response actions. Per the AI Canvas PRD, the canvas is designed around human-in-the-loop approval for any action - we will not auto-execute SOAR, Cisco actions, or any containment without your explicit approval. Tasks are read-only or propose-only - no actual containment is executed.</p>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> There&#x27;s no right or wrong way to prompt the AI. Phrase this however feels natural to you and see how AI Canvas responds. Don&#x27;t worry about getting it perfect - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
 </div>
-<div class="week-card"><div class="week-num">Week 1</div><h3 class="week-title">Orientation and free exploration</h3><p class="week-intent">Get acquainted with AI Canvas for triage. Establish a baseline of single-prompt security interactions.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div><a class="survey-link" href="soc_security_week1.html">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 2</div><h3 class="week-title">Deeper agentic security workflows</h3><p class="week-intent">Multi-step triage and an introduction to SOAR action proposals with human-in-the-loop approval.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div><a class="survey-link" href="soc_security_week2.html">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 3</div><h3 class="week-title">Multi-source correlation and long-running steps</h3><p class="week-intent">Test the canvas&#x27;s ability to handle multi-source security correlations and async/long-running enrichments.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~55 min</span></div><a class="survey-link" href="soc_security_week3.html">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
-<div class="week-card"><div class="week-num">Week 4</div><h3 class="week-title">Production reality and critique</h3><p class="week-intent">Use AI Canvas the way you would for a real incident. Critique everything.</p><div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span></div><a class="survey-link" href="soc_security_week4.html">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">2</div>
+<h4 class="task-title">Task 2 of 4: Knowledge object audit - duplicates and conflicts</h4>
+
+<span class="task-time">~15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to find duplicate or conflicting macros, lookups, or eventtypes.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">What to do</div>
+<div class="task-block-body">Ask the agent to audit knowledge objects for duplicates, near-duplicates, or potentially conflicting definitions.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> There&#x27;s no right or wrong way to prompt the AI. Phrase this however feels natural to you and see how AI Canvas responds. Don&#x27;t worry about getting it perfect - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">3</div>
+<h4 class="task-title">Task 3 of 4: Dashboard draft for index health</h4>
+
+<span class="task-time">~15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Ask AI Canvas to draft a dashboard (panels and SPL) for daily index-health monitoring. Don&#x27;t necessarily save it - we&#x27;re testing the drafting flow.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">What to do</div>
+<div class="task-block-body">Describe a dashboard you&#x27;d want for daily index health. Have the agent compose panels. Iterate.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> There&#x27;s no right or wrong way to prompt the AI. Phrase this however feels natural to you and see how AI Canvas responds. Don&#x27;t worry about getting it perfect - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+</div>
+<div class="task">
+<div class="task-header">
+<div class="task-number">4</div>
+<h4 class="task-title">Task 4 of 4: Long-running audit task</h4>
+
+<span class="task-time">~15 min</span>
+</div>
+<div class="task-block">
+<div class="task-block-label">Goal</div>
+<div class="task-block-body">Kick off a long-running audit (e.g., user-access audit over the last 30 days) and use the canvas to monitor it.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">What to do</div>
+<div class="task-block-body">Start the long search. While it runs, ask the agent another admin question. Observe how the canvas tracks both.</div>
+</div>
+<div class="task-block">
+<div class="task-block-label">Phrase it your way</div>
+<div class="task-callout articulation-callout"><strong>Use your own words.</strong> There&#x27;s no right or wrong way to prompt the AI. Phrase this however feels natural to you and see how AI Canvas responds. Don&#x27;t worry about getting it perfect - if AI Canvas misreads what you meant, that&#x27;s useful signal too.</div>
+</div>
+</div>
+</div>
+<div style="margin:28px 0 8px;"><a class="bt-back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>Back to all weeks</a></div>
 </div>
 
 <footer>
@@ -438,33 +499,5 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
         Lizzy Li, Canvas PM
     </div>
 </footer>
-<script>
-function switchTab(trackId, scroll = true) {
-    document.querySelectorAll('.tab-button').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.track === trackId);
-    });
-    document.querySelectorAll('.tab-content').forEach(div => {
-        div.classList.toggle('active', div.id === 'tab-' + trackId);
-    });
-    // Only scroll + rewrite the URL hash on an explicit tab click. On initial
-    // page load we skip this so the page opens at the top (hero), not snapped
-    // down to the tab bar.
-    if (scroll) {
-        window.scrollTo({top: document.querySelector('.tabs-bar').offsetTop - 60, behavior: 'smooth'});
-        history.replaceState(null, '', '#' + trackId);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Never let a restored scroll position or a leftover #track hash pull the
-    // page down on load - always open at the top (hero).
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    const initial = (location.hash || '#sre_observability').slice(1);
-    const btn = document.querySelector(`.tab-button[data-track="${initial}"]`);
-    switchTab(btn ? initial : 'sre_observability', false);
-    history.replaceState(null, '', location.pathname + location.search);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-});
-</script>
 </body>
 </html>
