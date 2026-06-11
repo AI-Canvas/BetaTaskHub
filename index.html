@@ -74,8 +74,24 @@ h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; ba
 .confidence-banner h4 { margin: 0 0 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pink); }
 .confidence-banner p { margin: 0; font-size: 14px; color: var(--ink-soft); }
 
-/* Tabs */
-.tabs-bar { display: flex; gap: 4px; margin: 40px 0 0; border-bottom: 2px solid var(--line); position: sticky; top: 56px; background: var(--bg); z-index: 50; padding-bottom: 0; }
+/* Section tabs (top-level: Instructions / Tasks) */
+.section-tabs-bar { display: flex; gap: 4px; border-bottom: 2px solid var(--line); position: sticky; top: 56px; background: var(--bg); z-index: 60; padding: 0 32px; max-width: 1244px; margin: 0 auto; }
+.section-tab-button {
+    background: none; border: none; padding: 16px 26px;
+    font-family: inherit; font-size: 15px; font-weight: 700;
+    color: var(--ink-soft); cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+    margin-bottom: -2px;
+    letter-spacing: -0.01em;
+}
+.section-tab-button:hover { color: var(--pink); }
+.section-tab-button.active { color: var(--pink); border-bottom-color: var(--pink); }
+.section-tab-content { display: none; }
+.section-tab-content.active { display: block; }
+
+/* Track tabs (nested inside the Tasks section) */
+.tabs-bar { display: flex; gap: 4px; margin: 40px 0 0; border-bottom: 2px solid var(--line); position: sticky; top: 110px; background: var(--bg); z-index: 50; padding-bottom: 0; }
 .tab-button {
     background: none; border: none; padding: 14px 22px;
     font-family: inherit; font-size: 14px; font-weight: 600;
@@ -91,6 +107,12 @@ h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; ba
 
 .tab-content { display: none; padding: 36px 0; }
 .tab-content.active { display: block; }
+
+/* Instructions tab body styling */
+.instructions-body { padding: 36px 0 24px; }
+.instructions-body .lead { font-size: 17px; color: var(--ink-soft); margin: 0 0 18px; max-width: 820px; line-height: 1.55; }
+.instructions-body .lead + .lead { margin-top: 14px; }
+.instructions-section-title { margin: 28px 0 12px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); }
 
 /* Track intro card */
 .track-intro {
@@ -355,26 +377,43 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
     </div>
 </nav>
 
+<div class="section-tabs-bar">
+    <button class="section-tab-button active" data-section="instructions" onclick="switchSection('instructions')">Instructions</button>
+    <button class="section-tab-button" data-section="tasks" onclick="switchSection('tasks')">Tasks</button>
+</div>
+
+<!-- ===================== Instructions tab ===================== -->
+<div id="section-instructions" class="section-tab-content active">
+
 <header class="hero">
     <div class="container">
         <div class="eyebrow">AI Canvas in Splunk - Customer Beta</div>
-        <h1>Weekly tasks for <span class="accent">your beta track</span>.</h1>
+        <h1>AI Canvas in Splunk <span class="accent">Beta program</span>.</h1>
         <p class="hero-sub">
-            Find your track below. Each week is collapsed into a short card &mdash; click anywhere
-            on a card to expand it and see that week&rsquo;s tasks. You can open the survey
-            directly from the card&rsquo;s <strong>Open Week N survey</strong> button without
-            expanding. The tasks deliberately don&rsquo;t hand you example prompts &mdash; we want
-            to see how you naturally phrase the work to AI Canvas. In Weeks 1 and 2, the free
-            exploration task is the <em>last</em> task &mdash; you&rsquo;ll warm up on the
-            structured tasks first, then drive your own exploration. In the survey, each
-            task&rsquo;s instructions and its feedback questions are on separate pages: click
-            <em>Next</em> after working a task to answer a few short questions about how it went.
+            Welcome. This beta is the first round of evaluative research on AI Canvas with Splunk
+            customers using their own production environment. Over four weeks, you&rsquo;ll work
+            through a small set of weekly tasks designed to surface how the agent behaves on real
+            observability, security, and admin work &mdash; not on staged data.
         </p>
-        <div class="hero-meta">
-            <div><strong>Recording reminder:</strong> screen + audio, upload via Splunk VOC.</div>
-            <div><strong>Environment:</strong> your own production environment, read-only tasks only.</div>
-        </div>
-        <div class="howto">
+    </div>
+</header>
+
+<div class="container">
+    <div class="instructions-body">
+        <div class="instructions-section-title">What we&rsquo;re learning</div>
+        <p class="lead">
+            We&rsquo;re testing whether AI Canvas with SAIA 2.0 agent mode genuinely helps you do
+            your job &mdash; or whether it gets in the way. Specifically, we want to see how
+            naturally you can phrase real work in your own words, where the agent&rsquo;s reasoning
+            holds up against your own data, and where trust, control, and recovery break down.
+        </p>
+        <p class="lead">
+            Your job during the beta is to use it like you&rsquo;d use any other tool in your stack
+            &mdash; on questions you actually have, in your own production environment, and to push
+            on it when it doesn&rsquo;t hold up. Tasks are read-only by design. Nothing here will
+            modify your environment.
+        </p>
+                <div class="howto">
             <div class="howto-head">
                 <h4>Record &amp; upload your session</h4>
                 <p>A short walkthrough, with the written steps beside it. Record your screen <em>and</em> audio while you work the tasks.</p>
@@ -410,6 +449,32 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
                 <p style="margin:10px 0 0 0;font-size:13px;color:#4a5568;">If none of the above methods worked or if you have questions about your tasks, email our researcher at <a href="mailto:maraelli@cisco.com">maraelli@cisco.com</a> for support.</p>
             </div>
         </div>
+        <!-- HOWTO_GRAFT_POINT: public hub injects the record + upload card here -->
+    </div>
+</div>
+
+</div>
+<!-- ================== End Instructions tab ==================== -->
+
+
+<!-- ===================== Tasks tab ============================ -->
+<div id="section-tasks" class="section-tab-content">
+
+<header class="hero">
+    <div class="container">
+        <div class="eyebrow">Weekly tasks for your beta track</div>
+        <h1>Weekly tasks for <span class="accent">your beta track</span>.</h1>
+        <p class="hero-sub">
+            Find your track below. Each week is collapsed into a short card &mdash; click anywhere
+            on a card to expand it and see that week&rsquo;s tasks. You can open the survey
+            directly from the card&rsquo;s <strong>Open Week N survey</strong> button without
+            expanding. The tasks deliberately don&rsquo;t hand you example prompts &mdash; we want
+            to see how you naturally phrase the work to AI Canvas. In Weeks 1 and 2, the free
+            exploration task is the <em>last</em> task &mdash; you&rsquo;ll warm up on the
+            structured tasks first, then drive your own exploration. In the survey, each
+            task&rsquo;s instructions and its feedback questions are on separate pages: click
+            <em>Next</em> after working a task to answer a few short questions about how it went.
+        </p>
         <div class="confidence-banner">
             <h4>How this hub works</h4>
             <p>
@@ -1479,6 +1544,10 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 </div>
 </div>
 
+</div>
+<!-- ===================== End Tasks tab ======================== -->
+
+
 <footer>
     AI Canvas in Splunk - Customer Beta Program
     <div class="footer-meta">
@@ -1488,6 +1557,19 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 </footer>
 
 <script>
+function switchSection(sectionId, scroll = true) {
+    document.querySelectorAll('.section-tab-button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.section === sectionId);
+    });
+    document.querySelectorAll('.section-tab-content').forEach(div => {
+        div.classList.toggle('active', div.id === 'section-' + sectionId);
+    });
+    if (scroll) {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        history.replaceState(null, '', '#' + sectionId);
+    }
+}
+
 function switchTab(trackId, scroll = true) {
     document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.track === trackId);
@@ -1495,22 +1577,29 @@ function switchTab(trackId, scroll = true) {
     document.querySelectorAll('.tab-content').forEach(div => {
         div.classList.toggle('active', div.id === 'tab-' + trackId);
     });
-    // Only scroll + rewrite the URL hash on an explicit tab click. On initial
-    // page load we skip this so the page opens at the top (hero), not snapped
-    // down to the tab bar.
     if (scroll) {
-        window.scrollTo({top: document.querySelector('.tabs-bar').offsetTop - 60, behavior: 'smooth'});
+        const tabsBar = document.querySelector('.tabs-bar');
+        if (tabsBar) {
+            window.scrollTo({top: tabsBar.offsetTop - 60, behavior: 'smooth'});
+        }
         history.replaceState(null, '', '#' + trackId);
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Never let a restored scroll position or a leftover #track hash pull the
-    // page down on load - always open at the top (hero).
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    const initial = (location.hash || '#sre_observability').slice(1);
-    const btn = document.querySelector(`.tab-button[data-track="${initial}"]`);
-    switchTab(btn ? initial : 'sre_observability', false);
+    // Resolve initial section + track from the URL hash. Hash can be:
+    //   #instructions / #tasks  -> section
+    //   #sre_observability / #splunk_admin / #soc_security -> implies tasks section + that track
+    //   anything else / no hash -> default Instructions section, SRE track
+    const hash = (location.hash || '').slice(1);
+    const trackIds = ['sre_observability', 'splunk_admin', 'soc_security'];
+    let section = 'instructions';
+    let track = 'sre_observability';
+    if (hash === 'tasks') section = 'tasks';
+    else if (trackIds.includes(hash)) { section = 'tasks'; track = hash; }
+    switchSection(section, false);
+    switchTab(track, false);
     history.replaceState(null, '', location.pathname + location.search);
     window.scrollTo({ top: 0, behavior: 'instant' });
 });
