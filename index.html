@@ -465,14 +465,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a new AI Canvas. Ask it - in your own words - to help you look at the errors happening in a part of your environment you care about. You decide the scope (which index, sourcetype, service), the time window, and how you want the results broken down.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent mode should compose an SPL search using your index/sourcetype, run it, return a grouped result table or visualization, and offer drill-back to raw events.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the SPL correct for your data model? Did the agent default to a reasonable time range, or did it ask? If the result is empty, did the agent suggest a next step?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -488,14 +480,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a new AI Canvas. Describe the volume question in your own words. You pick the baseline window that&#x27;s meaningful for your environment (a day, a week, a month) and the threshold for what counts as unusual.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should compose a volume-comparison query (often using tstats or metadata for performance), run it, and return a ranked list of sources with the largest deltas.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent use tstats or metadata commands (efficient) or a raw event search (slow/expensive)? Did it pick a sensible baseline window without being told?</div>
 </div>
 </div>
 <div class="task">
@@ -513,14 +497,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">From any of the cards in your canvas, click into the underlying events or ask the agent to show you the raw events that produced the summary. Scan the events. Return to the prior canvas view.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Canvas should display raw events in their original context, alongside the SPL search that produced them. You should be able to return to the prior canvas view in one click.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Could you see the actual SPL that drove the summary? Did the raw events confirm the summary&#x27;s interpretation, or did you spot a mismatch?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -536,14 +512,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open Splunk in your production environment. Navigate to Search &amp; Reporting and then AI Canvas. Start a new canvas. Type a natural-language question about something in your environment you actually care about. Let the agent respond. Repeat with a follow-up prompt if you want.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> AI Canvas should accept the natural-language prompt, compose and run one or more SPL queries, return results in structured cards, and let you drill back to raw events. Note: searches in agent mode may impact SVC consumption.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the SPL look syntactically correct against your data? Did the response feel like it understood your environment, or did it return something generic?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -580,14 +548,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Start a new canvas. Describe the two-step investigation in your own words. You pick the time window, the data sources for change events (CI/CD logs, deploy notes, ticket index, whatever your team uses), and the definition of noisy.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Per the SAIA 2.0 docs, agent mode can parse a prompt into parallel tool and skill calls. Expect two related searches (error rate + deploy events) to run, with results stitched into a single answer.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent run both searches or only one? Was the correlation actually meaningful, or did it just dump two unrelated results next to each other?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -603,14 +563,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a new canvas. Ask an opening question about errors or activity in a service or index you care about. Then push it through at least three follow-up turns - narrowing time, changing how it&#x27;s grouped, adding or removing a filter. Phrase each follow-up however feels natural; the point is not the words but whether the agent keeps cumulative context.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Each follow-up should incrementally modify the SPL and re-run it. The new result should clearly show the change.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Could you see the new SPL each time? Were the changes actually applied, or did the agent quietly drop one of your filters?</div>
 </div>
 </div>
 <div class="task">
@@ -628,14 +580,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Find a result from the previous tasks that seemed off, or unexpected, or just worth confirming. Drill back to raw events. Read at least 5 actual events. Decide whether the AI&#x27;s summary was accurate.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The canvas should let you view underlying raw results and metadata for any summarized output and return to the prior context in one click.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the summary match the raw events? Was anything hidden (filtered, truncated, paraphrased) that mattered?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -651,14 +595,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a routine ops task: triage a noisy host, follow up on a recent deploy, check the health of a service. Use AI Canvas as your investigation surface. Use follow-up prompts liberally.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should maintain context across prompts in the same canvas. Each follow-up should refine the result without restarting from scratch.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent remember context (index, time range, previous filters)? Were follow-ups faster than starting over manually?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -695,14 +631,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">In a new canvas, ask the agent to investigate a scenario that requires looking at two distinct data sources in your environment. Look for whether the agent stitches the evidence into one narrative.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Per SAIA 2.0 docs, parallel tool calls are supported. Expect two searches against two indexes, with the agent presenting a stitched view rather than two disconnected tables.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent actually correlate, or just paste two results side-by-side? Did time alignment work?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -718,14 +646,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">If you don&#x27;t have ITSI, skip this task and mark it &#x27;Skipped&#x27; in the feedback. If you do, ask the agent to query something straightforward from your ITSI indexes.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should query the ITSI index as it would any other Splunk index. Episode-level reasoning or ITSI AI skills are out of scope for the beta.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent know how ITSI&#x27;s data is structured, or did it try generic queries? Did anything fail in a confusing way?</div>
 </div>
 </div>
 <div class="task">
@@ -743,14 +663,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Describe a saved-search-worthy use case in plain language. Have the agent compose it. Iterate until you&#x27;d be willing to save it. Optionally copy the SPL into a notepad outside Splunk to preserve it.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should produce a copy-pastable SPL string and explain the logic. You should be able to iterate via follow-ups.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the SPL production-ready? Did it use efficient commands? Did it explain its choices in a way that would survive a code review?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -766,14 +678,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a saved Report you already use (in Search &amp; Reporting). Once it returns, send the result into AI Canvas - use whatever in-product affordance is exposed for adding the report&#x27;s results to a canvas. Once it&#x27;s in the canvas, ask the agent follow-up questions to extend the investigation. If you can&#x27;t find the affordance, capture that as feedback and try copying the SPL or describing the result in a new canvas as a fallback.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The Report&#x27;s results should land in AI Canvas as a starting card. The agent should be able to reason over them and propose follow-up searches without you re-explaining the original query.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the path from Report to canvas obvious? Did the agent treat the imported data as context, or did it ignore it and start over?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -810,14 +714,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Choose a question you would actually have to answer this week (a real ticket, a recent incident, a performance question). Use AI Canvas as your investigation surface from start to finish. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should maintain context across many turns, compose and run searches, return structured results, support drill-back, and let you flag or save key findings.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Where did you find yourself wanting to leave AI Canvas to do something manually? What did it do better than your usual flow? What did it do worse?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -833,14 +729,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Continuing from a previous task (or in a fresh canvas with some results in it), ask AI Canvas in your own words to recommend where to look next. For each suggestion it gives, decide: would you actually do that? Capture your reasoning in a notepad alongside.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should propose 2-3 concrete next steps with rationale tied to current evidence. Proposals should reference the evidence that prompted them.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Were the proposals concrete (could you act on them) or vague? Did they reference what was already in the canvas? Were they ranked by impact?</div>
 </div>
 </div>
 <div class="task">
@@ -858,14 +746,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a recent investigation where you already know the answer. Ask AI Canvas the same question fresh. Time how long it takes. Compare its answer to yours.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should arrive at a reasonable answer with less manual SPL work on your part. Some answers may be missing nuance you&#x27;d have caught.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the AI&#x27;s answer correct? Was it complete? Was it faster end-to-end (including your verification time)? Would you trust it enough to skip the manual flow next time?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -882,14 +762,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a task you&#x27;d normally tackle with a teammate. Ask another team member who&#x27;s also in the beta to join you, then share your canvas with them: copy the canvas link and send it to them. Work the task together in the shared canvas. If no teammate is available, skip this task and mark it &#x27;Skipped&#x27; in the feedback.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The canvas link should open the same canvas for your teammate so you can work it together.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was sharing easy to find? Did the shared canvas show the same state for both of you?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -905,14 +777,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Use the open-ended response below to capture concerns. Be specific - &#x27;the SPL was wrong&#x27; is less useful than &#x27;the SPL used eventtype= when there&#x27;s no eventtype in my data, and it didn&#x27;t recover when I told it that&#x27;.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> N/A - this is a reflection task.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Trust failures. Permission flow friction. SVC cost concerns. Errors that the agent didn&#x27;t recover from.</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -956,14 +820,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">In your own words, ask AI Canvas to help you look at license consumption over a recent window. You pick the window and the breakdown that&#x27;s most useful (by source, by sourcetype, by host - your call).</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should query the _internal index for license usage (license_usage.log via index=_internal source=*license_usage.log* or similar), aggregate by day, and return a trend.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent use the right log source? Did it know the conventional license_usage SPL pattern?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -979,14 +835,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Ask AI Canvas - in your own words - to help you find indexes that look off. You decide the baseline and what counts as significant change.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should use dbinspect, metadata, or _internal queries (depending on what&#x27;s accessible) to compare growth against a baseline and return a ranked list.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it use efficient commands like tstats or dbinspect, or did it walk raw events? Did it pick a reasonable baseline window?</div>
 </div>
 </div>
 <div class="task">
@@ -1004,14 +852,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">From any card in your canvas, drill into the raw events or look at the SPL the agent used. Confirm the summary matches.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> You should be able to view the underlying SPL and raw events for any AI-generated summary and return to context in one click.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the SPL inspectable? Was it editable if you wanted to tweak it?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1027,14 +867,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open AI Canvas. Type an admin-flavored question - license usage, index health, search performance, user activity, anything.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should compose admin-relevant SPL (often against the _internal, _audit, or _introspection indexes), run it, and return structured results.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent know which internal indexes to use? Did the SPL feel admin-aware, or did it default to user-data indexes?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1071,14 +903,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Ask AI Canvas in your own words to help you check on search head or indexer health. You pick which tier you want to look at and which dimensions matter to you (queues, concurrency, CPU, memory, disk - whatever you usually watch).</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should query _introspection or _internal for the relevant metrics and return a structured view.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it know about _introspection? Did the metric interpretation match your domain knowledge?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1094,14 +918,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Describe the audit you want in your own words. You decide what counts as stale (30 days, 60 days, never succeeded) and what you want to see (owners, apps, last-run timestamp).</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should query the audit log or rest endpoints for saved-search execution history.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it use audit logs correctly? Did it surface actionable owners (who created the search)?</div>
 </div>
 </div>
 <div class="task">
@@ -1119,14 +935,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a new canvas. Ask an opening admin question - could be about user activity, search performance, schedule load, anything. Then push it through three follow-ups, narrowing or pivoting however feels natural. Phrase the follow-ups however you would in a real investigation.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Each follow-up should modify the SPL and re-run.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent keep cumulative context, or restart with each prompt? Did the SPL stay efficient?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1142,14 +950,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a routine admin task: license audit, indexer health, capacity check. Use AI Canvas with follow-up prompts liberally.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should maintain context across prompts and refine results through follow-ups.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did follow-ups feel faster than starting over? Did the agent surface the right next thing to check?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1186,14 +986,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Describe the capacity question you actually have today (license, disk, ingest, something else) and the horizon you care about. Ask AI Canvas to forecast it. Look at the method and the uncertainty as much as the number.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent may use predict or similar SPL forecasting commands, or summarize a trend and project linearly.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it explain its forecasting method? Did it flag uncertainty? Would you trust this for a capacity conversation with leadership?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1209,14 +1001,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a Dashboard Studio dashboard you actually use. Pick a panel that shows something interesting right now. Send that panel&#x27;s data into AI Canvas - use whatever in-product affordance is exposed for adding the panel to a canvas. Once it&#x27;s in the canvas, ask the agent follow-up questions to dig in. If you can&#x27;t find the affordance, capture that as feedback and describe the panel to a new canvas as a fallback.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The Studio panel&#x27;s data should land in the canvas as a starting card. The agent should be able to reason over the panel&#x27;s content and propose follow-up searches without you re-explaining the original SPL.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the path from Dashboard Studio to canvas obvious? Did the agent treat the imported panel data as context, or did it ignore it?</div>
 </div>
 </div>
 <div class="task">
@@ -1234,14 +1018,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Describe a dashboard you&#x27;d want for daily index health. Have the agent compose panels. Iterate.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should produce panel SPL plus dashboard XML or Studio JSON, with explanations.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the output paste-able? Did the panels actually work when you tried to render them?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1257,14 +1033,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open a recently triggered alert (one from your platform monitoring or from any saved alert your team uses). Send the alert&#x27;s context into AI Canvas - use whatever in-product affordance is exposed for adding the alert to a canvas. Once it&#x27;s in the canvas, ask the agent follow-up questions to investigate. If you can&#x27;t find the affordance, capture that as feedback and describe the alert manually in a new canvas as a fallback.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The alert&#x27;s context should land in AI Canvas as a starting card. The agent should reason over it and propose follow-up searches without you re-explaining the alert.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the path from alert to canvas obvious? Did the agent treat the imported alert as context, or did it start from scratch?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1301,14 +1069,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Use AI Canvas as your investigation surface. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should maintain multi-turn context and let you drill back, flag findings, and iterate.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Where did the agent fall short? Where did it outperform your manual flow?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1324,14 +1084,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Take a finding from a previous task (or a known admin issue). Ask the agent what it would recommend. Walk through each proposal with a critical eye - look at what evidence the agent cites and whether the recommendation would actually work in your environment.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should propose remediations with explanations tied to evidence, not auto-execute anything.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Were the proposals actionable or vague? Did they reference the actual evidence in the canvas?</div>
 </div>
 </div>
 <div class="task">
@@ -1349,14 +1101,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Use the same question fresh in AI Canvas. Time the interaction. Compare the answer to your manual one.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should arrive at a reasonable answer with less manual SPL work on your part.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was it faster end-to-end including verification? Would you skip the manual flow next time?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1373,14 +1117,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a task you&#x27;d normally tackle with a teammate. Ask another team member who&#x27;s also in the beta to join you, then share your canvas with them: copy the canvas link and send it to them. Work the task together in the shared canvas. If no teammate is available, skip this task and mark it &#x27;Skipped&#x27; in the feedback.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The canvas link should open the same canvas for your teammate so you can work it together.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was sharing easy to find? Did the shared canvas show the same state for both of you?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1396,14 +1132,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Be specific - &#x27;the SPL was wrong&#x27; is less useful than &#x27;the SPL didn&#x27;t filter by index, so it ran against everything and the cost concerned me&#x27;.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> N/A - reflection task.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Trust failures. Permission/SVC concerns. Errors that didn&#x27;t recover.</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1447,14 +1175,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">In your own words, ask AI Canvas to surface the high-severity activity worth your attention. You decide what &#x27;high-severity&#x27; means in your environment, what time window to look at, and how you want it broken down.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should query the appropriate alert or detection index, aggregate by category, and return a ranked view.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it understand the difference between a high-severity alert and routine activity? Did it pick a sensible time window?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1470,14 +1190,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick an entity. Ask AI Canvas - however you&#x27;d ask a teammate - to help you understand what&#x27;s happening with that entity. You decide what context matters (recent activity, associations, geo, history).</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should run multiple parallel searches against different indexes/sourcetypes to gather context. Enrichment results should render as structured cards with attribution.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it pull from multiple indexes (auth, network, endpoint)? Did it summarize a coherent picture, or dump raw search results?</div>
 </div>
 </div>
 <div class="task">
@@ -1495,14 +1207,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Drill back from a summary card to raw events. Read the actual events. Decide whether the summary is accurate.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Canvas should expose the underlying SPL and raw events for any summary, with one-click return to context.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the summary accurately reflect the raw data? Did the agent paraphrase anything that changed the meaning?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1518,14 +1222,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Open AI Canvas. Pick an alert from your queue or a recent investigation question. Type a natural-language prompt.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should compose security-relevant SPL (often against index=main with auth or security sourcetypes, or your detection indexes), run it, and return structured results.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the agent know which indexes are security-relevant in your environment? Did the SPL match your data?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1562,14 +1258,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a high-severity alert from your queue (whatever you&#x27;d actually triage today). Ask AI Canvas to help you triage it - phrase it however you would naturally describe the work to a teammate. Use follow-ups to push the agent deeper where you&#x27;d normally dig.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Per SAIA 2.0 docs, agent mode parses one prompt into parallel tool/skill calls. Expect 3-4 related searches to run, with results combined into one triage narrative.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">How many searches did it run? Were they relevant? Did the final narrative add value beyond the sum of the searches?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1585,14 +1273,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick an entity or finding from a previous task. Ask the agent to draft a recommended response plan in its own words. You decide what to include - containment ideas, monitoring next steps, who to loop in, what evidence is still missing. Read the plan, then ask follow-ups to sharpen it.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should produce a written plan grounded in the canvas&#x27;s evidence (cards, prior queries, drill-back data). The plan should reference specific findings, not generic security advice.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the plan tied to specific evidence in the canvas, or did it read like a generic playbook? Did follow-ups actually sharpen the plan, or did the agent just rephrase?</div>
 </div>
 </div>
 <div class="task">
@@ -1610,14 +1290,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a suggestion from the previous tasks. Ask the agent to show the evidence and reasoning. Drill into raw data to confirm.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Suggestions should link back to evidence with attribution. You should be able to see the searches and raw events that informed the suggestion.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the evidence chain clear? Was anything cited that you couldn&#x27;t actually find when you drilled in?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1633,14 +1305,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a threat hypothesis you&#x27;ve been wanting to investigate. Use follow-up prompts to refine. Let the agent propose where to look next.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should run searches across multiple data sources and stitch results into one narrative.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did it ask the right questions back? Did it surface anomalies you wouldn&#x27;t have found manually?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1677,14 +1341,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pose a question that requires looking at two distinct data sources. Look for whether the agent ties them together meaningfully.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should run parallel queries against both indexes and synthesize a combined view, not just paste two tables side by side.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did the time alignment work? Did the entity matching across sources actually link the same user/host?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1700,14 +1356,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Start a long search. While it runs, ask the agent another question in the same canvas. Observe both step statuses.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Updates for the long-running step should land in place with pending/updated/error status, last-checked, and next-check times. The canvas should stay usable while it runs.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was the long step visible while you worked? Did the result fold back in cleanly when it finished?</div>
 </div>
 </div>
 <div class="task">
@@ -1725,14 +1373,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Continuing from any active canvas this week, ask AI Canvas - in your own words - to recommend where to look next. For each suggestion, engage critically: would you actually do that, and why or why not?</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Proposals should reference evidence in the canvas and explain rationale - not generic playbook items.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Were proposals actionable? Did they reference the evidence in front of you? Did they prioritize?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1748,14 +1388,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">From any canvas this week, flag the findings that matter most. Close the canvas. Re-open it the way you would tomorrow morning - find your flagged items, ask the agent to help you re-orient. Notice whether flagging actually helped you resume, or whether you had to re-read the whole canvas.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Flagging should be discoverable inside the canvas. Flagged items should be visible together when you return. The agent should be able to summarize them on re-entry.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Did flagging actually help you resume, or did you still need to re-read the whole canvas? Were the flagged items findable?</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
@@ -1792,14 +1424,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Use AI Canvas as your full investigation surface. Drive it with multi-turn prompts, drill back, flag findings, propose next steps. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should maintain multi-turn context, run searches, support drill-back and flagging, and let you arrive at a disposition with audit trail.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Where did the canvas fall short of your usual flow? Where did it outperform?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1815,14 +1439,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Same question, fresh canvas. Time the interaction. Compare the answer.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> Agent should arrive at a reasonable answer with less manual SPL work.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was it faster end-to-end including verification? Would you trust it enough to skip the manual flow?</div>
 </div>
 </div>
 <div class="task">
@@ -1840,14 +1456,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Pick a task you&#x27;d normally tackle with a teammate. Ask another team member who&#x27;s also in the beta to join you, then share your canvas with them: copy the canvas link and send it to them. Work the task together in the shared canvas. If no teammate is available, skip this task and mark it &#x27;Skipped&#x27; in the feedback.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> The canvas link should open the same canvas for your teammate so you can work it together.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Was sharing easy to find? Did the shared canvas show the same state for both of you?</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1863,14 +1471,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="task-block">
 <div class="task-block-label">Instructions</div>
 <div class="task-block-body">Be specific. Examples: &#x27;the agent confidently said X but the evidence said Y&#x27;, or &#x27;the canvas couldn&#x27;t keep enough state across the long-running enrichment step - I lost the thread when I came back&#x27;.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Expected behavior</div>
-<div class="task-callout"><strong>What you should see.</strong> N/A - reflection task.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Watch for</div>
-<div class="watch-for">Hallucinated entities. Searches that touched data you didn&#x27;t expect. Places where the canvas lost context between turns.</div>
 </div>
 </div>
 <div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
