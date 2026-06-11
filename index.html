@@ -75,20 +75,54 @@ h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; ba
 .confidence-banner p { margin: 0; font-size: 14px; color: var(--ink-soft); }
 
 /* Section tabs (top-level: Instructions / Tasks) */
-.section-tabs-bar { display: flex; gap: 4px; border-bottom: 2px solid var(--line); position: sticky; top: 56px; background: var(--bg); z-index: 60; padding: 0 32px; max-width: 1244px; margin: 0 auto; }
-.section-tab-button {
-    background: none; border: none; padding: 16px 26px;
-    font-family: inherit; font-size: 15px; font-weight: 700;
-    color: var(--ink-soft); cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.15s;
-    margin-bottom: -2px;
-    letter-spacing: -0.01em;
+.section-tabs-wrap { position: sticky; top: 56px; background: var(--bg); z-index: 60; border-bottom: 1px solid var(--line); }
+.section-tabs-bar {
+    display: flex; gap: 8px;
+    max-width: 1180px; margin: 0 auto; padding: 14px 32px;
+    background: var(--bg);
 }
-.section-tab-button:hover { color: var(--pink); }
-.section-tab-button.active { color: var(--pink); border-bottom-color: var(--pink); }
+.section-tab-button {
+    position: relative;
+    background: white;
+    border: 1.5px solid var(--line);
+    padding: 14px 28px;
+    font-family: inherit; font-size: 15px; font-weight: 700;
+    color: var(--ink); cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.18s ease;
+    letter-spacing: -0.01em;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: var(--shadow-sm);
+}
+.section-tab-button .section-tab-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    color: var(--ink-soft);
+    font-size: 12px; font-weight: 800;
+    transition: all 0.18s ease;
+}
+.section-tab-button:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+.section-tab-button:hover .section-tab-num { background: rgba(237, 20, 125, 0.1); color: var(--pink); }
+.section-tab-button.active {
+    background: var(--gradient-warm);
+    border-color: transparent;
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+.section-tab-button.active .section-tab-num { background: rgba(255, 255, 255, 0.25); color: white; }
 .section-tab-content { display: none; }
 .section-tab-content.active { display: block; }
+@media (max-width: 600px) {
+    .section-tabs-bar { padding: 12px 16px; flex-wrap: wrap; }
+    .section-tab-button { padding: 12px 20px; font-size: 14px; }
+}
 
 /* Track tabs (nested inside the Tasks section) */
 .tabs-bar { display: flex; gap: 4px; margin: 40px 0 0; border-bottom: 2px solid var(--line); position: sticky; top: 110px; background: var(--bg); z-index: 50; padding-bottom: 0; }
@@ -109,10 +143,42 @@ h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; ba
 .tab-content.active { display: block; }
 
 /* Instructions tab body styling */
-.instructions-body { padding: 36px 0 24px; }
-.instructions-body .lead { font-size: 17px; color: var(--ink-soft); margin: 0 0 18px; max-width: 820px; line-height: 1.55; }
+.instructions-body { padding: 36px 0 24px; max-width: 820px; }
+.instructions-body .lead { font-size: 17px; color: var(--ink-soft); margin: 0 0 18px; line-height: 1.55; }
 .instructions-body .lead + .lead { margin-top: 14px; }
 .instructions-section-title { margin: 28px 0 12px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); }
+/* Howto card breaks back out to full container width since it has its own
+ * two-column layout (video + steps) that needs the room. */
+.instructions-body .howto { max-width: none; }
+
+/* "Pick your track" CTA inside Instructions tab */
+.track-cta { margin: 28px 0 8px; padding: 24px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; }
+.track-cta h4 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em; color: var(--ink); }
+.track-cta p { margin: 0 0 16px; font-size: 14px; color: var(--ink-soft); }
+.track-cta-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+.track-cta-button {
+    flex: 1 1 200px;
+    min-width: 180px;
+    background: white;
+    border: 1.5px solid var(--line);
+    padding: 14px 18px;
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    color: var(--ink); cursor: pointer;
+    border-radius: 10px;
+    text-align: left;
+    transition: all 0.15s ease;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: var(--shadow-sm);
+}
+.track-cta-button:hover {
+    border-color: var(--orange);
+    color: var(--pink);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+.track-cta-button .cta-emoji { font-size: 18px; }
+.track-cta-button .cta-arrow { margin-left: auto; color: var(--muted); font-weight: 700; transition: transform 0.15s, color 0.15s; }
+.track-cta-button:hover .cta-arrow { color: var(--pink); transform: translateX(3px); }
 
 /* Track intro card */
 .track-intro {
@@ -377,9 +443,15 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
     </div>
 </nav>
 
-<div class="section-tabs-bar">
-    <button class="section-tab-button active" data-section="instructions" onclick="switchSection('instructions')">Instructions</button>
-    <button class="section-tab-button" data-section="tasks" onclick="switchSection('tasks')">Tasks</button>
+<div class="section-tabs-wrap">
+    <div class="section-tabs-bar" role="tablist" aria-label="Hub sections">
+        <button class="section-tab-button active" data-section="instructions" role="tab" aria-selected="true" onclick="switchSection('instructions')">
+            <span class="section-tab-num">1</span>Instructions
+        </button>
+        <button class="section-tab-button" data-section="tasks" role="tab" aria-selected="false" onclick="switchSection('tasks')">
+            <span class="section-tab-num">2</span>Tasks
+        </button>
+    </div>
 </div>
 
 <!-- ===================== Instructions tab ===================== -->
@@ -413,41 +485,58 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
             on it when it doesn&rsquo;t hold up. Tasks are read-only by design. Nothing here will
             modify your environment.
         </p>
+
+        <div class="track-cta">
+            <h4>Pick your beta track and get started</h4>
+            <p>Open the Tasks tab with your track preselected. You can always switch tracks from the Tasks tab.</p>
+            <div class="track-cta-buttons">
+                <button class="track-cta-button" type="button" onclick="goToTrack('sre_observability')">
+                    <span class="cta-emoji">&#9881;</span>SRE / Observability<span class="cta-arrow">&rarr;</span>
+                </button>
+                <button class="track-cta-button" type="button" onclick="goToTrack('splunk_admin')">
+                    <span class="cta-emoji">&#128296;</span>Splunk Admin<span class="cta-arrow">&rarr;</span>
+                </button>
+                <button class="track-cta-button" type="button" onclick="goToTrack('soc_security')">
+                    <span class="cta-emoji">&#128737;</span>SOC / Security<span class="cta-arrow">&rarr;</span>
+                </button>
+            </div>
+        </div>
+
                 <div class="howto">
-            <div class="howto-head">
-                <h4>Record &amp; upload your session</h4>
-                <p>A short walkthrough, with the written steps beside it. Record your screen <em>and</em> audio while you work the tasks.</p>
-            </div>
-            <div class="howto-grid">
-                <div>
-                    <video class="howto-video" controls preload="metadata" playsinline>
-                        <source src="HowTo_Record_W1.mp4" type="video/mp4">
-                        Your browser doesn&rsquo;t support embedded video &mdash;
-                        <a href="HowTo_Record_W1.mp4">download the walkthrough</a> instead.
-                    </video>
-                    <p class="howto-video-note">No sound needed to follow along &mdash; every step is written out beside the video.</p>
-                </div>
-                <div>
-                    <ol class="howto-steps">
-                        <li><strong>Record screen + audio.</strong> Use your built-in recorder &mdash; macOS: <strong>Shift + Cmd + 5</strong>; Windows: <strong>Win + Alt + R</strong> (Xbox Game Bar). Capture your screen and your voice as you work the tasks.</li>
-                        <li><strong>Name the file</strong> with your name, your track, and week, e.g. <strong>maral-elliott_SOC_week1</strong>.</li>
-                        <li><strong>Open the Box link or use the embedded page here, drag your file in, and add your email.</strong></li>
-                        <li><strong>Check the consent box and hit Submit.</strong></li>
-                        <li><strong>Wait for the success screen</strong> &mdash; &ldquo;Success! Your file has been submitted.&rdquo; Large files take a few minutes, so keep the window open until you see it.</li>
-                    </ol>
-                </div>
-            </div>
-            <details class="howto-embed" open>
-                <summary>upload right here, without leaving the hub</summary>
-                <iframe class="howto-embed-frame"
-                        src="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879"
-                        title="Secure Box upload" loading="lazy"></iframe>
-                <p class="howto-embed-note">If this panel shows &ldquo;refused to connect,&rdquo; just use the secure Box link below &mdash; it opens the same form in a new tab.</p>
-            </details>
-            <div class="howto-upload">
-                <strong>or Upload here:</strong> <a href="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879" target="_blank" rel="noopener noreferrer">secure Box upload link</a>, or email your file to <a href="mailto:Beta_Fi.62liqrzggkurgqsp@u.box.com">Beta_Fi.62liqrzggkurgqsp@u.box.com</a>.
-                <p style="margin:10px 0 0 0;font-size:13px;color:#4a5568;">If none of the above methods worked or if you have questions about your tasks, email our researcher at <a href="mailto:maraelli@cisco.com">maraelli@cisco.com</a> for support.</p>
-            </div>
+        <div class="howto-head">
+        <h4>Record &amp; upload your session</h4>
+        <p>A short walkthrough, with the written steps beside it. Record your screen <em>and</em> audio while you work the tasks.</p>
+        </div>
+        <div class="howto-grid">
+        <div>
+            <video class="howto-video" controls preload="metadata" playsinline>
+                <source src="HowTo_Record_W1.mp4" type="video/mp4">
+                Your browser doesn&rsquo;t support embedded video &mdash;
+                <a href="HowTo_Record_W1.mp4">download the walkthrough</a> instead.
+            </video>
+            <p class="howto-video-note">No sound needed to follow along &mdash; every step is written out beside the video.</p>
+        </div>
+        <div>
+            <ol class="howto-steps">
+                <li><strong>Record screen + audio.</strong> Use your built-in recorder &mdash; macOS: <strong>Shift + Cmd + 5</strong>; Windows: <strong>Win + Alt + R</strong> (Xbox Game Bar). Capture your screen and your voice as you work the tasks.</li>
+                <li><strong>Name the file</strong> with your name, your track, and week, e.g. <strong>maral-elliott_SOC_week1</strong>.</li>
+                <li><strong>Open the Box link or use the embedded page here, drag your file in, and add your email.</strong></li>
+                <li><strong>Check the consent box and hit Submit.</strong></li>
+                <li><strong>Wait for the success screen</strong> &mdash; &ldquo;Success! Your file has been submitted.&rdquo; Large files take a few minutes, so keep the window open until you see it.</li>
+            </ol>
+        </div>
+        </div>
+        <details class="howto-embed" open>
+        <summary>upload right here, without leaving the hub</summary>
+        <iframe class="howto-embed-frame"
+                src="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879"
+                title="Secure Box upload" loading="lazy"></iframe>
+        <p class="howto-embed-note">If this panel shows &ldquo;refused to connect,&rdquo; just use the secure Box link below &mdash; it opens the same form in a new tab.</p>
+        </details>
+        <div class="howto-upload">
+        <strong>or Upload here:</strong> <a href="https://cisco.app.box.com/f/16a3ddcf581d4b1b8dea175cb9a6d879" target="_blank" rel="noopener noreferrer">secure Box upload link</a>, or email your file to <a href="mailto:Beta_Fi.62liqrzggkurgqsp@u.box.com">Beta_Fi.62liqrzggkurgqsp@u.box.com</a>.
+        <p style="margin:10px 0 0 0;font-size:13px;color:#4a5568;">If none of the above methods worked or if you have questions about your tasks, email our researcher at <a href="mailto:maraelli@cisco.com">maraelli@cisco.com</a> for support.</p>
+        </div>
         </div>
         <!-- HOWTO_GRAFT_POINT: public hub injects the record + upload card here -->
     </div>
@@ -1559,7 +1648,9 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <script>
 function switchSection(sectionId, scroll = true) {
     document.querySelectorAll('.section-tab-button').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.section === sectionId);
+        const isActive = btn.dataset.section === sectionId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     document.querySelectorAll('.section-tab-content').forEach(div => {
         div.classList.toggle('active', div.id === 'section-' + sectionId);
@@ -1567,6 +1658,18 @@ function switchSection(sectionId, scroll = true) {
     if (scroll) {
         window.scrollTo({top: 0, behavior: 'smooth'});
         history.replaceState(null, '', '#' + sectionId);
+    }
+}
+
+function goToTrack(trackId) {
+    switchSection('tasks', false);
+    switchTab(trackId, false);
+    history.replaceState(null, '', '#' + trackId);
+    const trackTabs = document.querySelector('.tabs-bar');
+    if (trackTabs) {
+        window.scrollTo({top: trackTabs.offsetTop - 120, behavior: 'smooth'});
+    } else {
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 }
 
