@@ -283,6 +283,52 @@ h1 .accent { background: var(--gradient-warm); -webkit-background-clip: text; ba
 .week-toggle svg { width: 14px; height: 14px; transition: transform 0.2s; }
 .week-section[open] .week-toggle svg { transform: rotate(180deg); }
 
+/* Week 1 onboarding-survey prerequisite banner. Sits inside <summary> below
+   the header so it is visible whether the card is collapsed or expanded. */
+.week-prereq {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 16px;
+    margin: 0 24px 20px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, rgba(237,20,125,0.08) 0%, rgba(155,13,218,0.05) 100%);
+    border: 1px solid rgba(237,20,125,0.25);
+    border-left: 4px solid var(--pink);
+    border-radius: 10px;
+}
+.week-prereq-badge {
+    flex-shrink: 0;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: white;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 13px;
+    letter-spacing: 0.02em;
+}
+.week-prereq-body {
+    flex: 1; min-width: 240px;
+    font-size: 13.5px; line-height: 1.5;
+    color: var(--ink);
+}
+.week-prereq-body strong { color: var(--pink); font-weight: 700; }
+.week-prereq-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 15px;
+    background: white;
+    color: var(--pink);
+    border: 1.5px solid var(--pink);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px; font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+.week-prereq-link:hover {
+    background: var(--pink); color: white;
+    transform: translateY(-1px);
+}
+.week-prereq-link svg { width: 13px; height: 13px; }
+
 /* Tasks */
 .tasks-container {
     background: white;
@@ -601,6 +647,7 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
+<div class="week-prereq"><span class="week-prereq-badge" aria-hidden="true">1st</span><div class="week-prereq-body"><strong>Before you start Week 1:</strong> please complete the AI Canvas Beta onboarding survey first (about 5 minutes). It captures your baseline so we can measure how Week 1 changes the picture. If you have already submitted it, just open Week 1.</div><a class="week-prereq-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_datypSg3OgimB6K" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open onboarding survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </summary>
 <div class="tasks-container">
 <div class="task">
@@ -972,6 +1019,7 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
+<div class="week-prereq"><span class="week-prereq-badge" aria-hidden="true">1st</span><div class="week-prereq-body"><strong>Before you start Week 1:</strong> please complete the AI Canvas Beta onboarding survey first (about 5 minutes). It captures your baseline so we can measure how Week 1 changes the picture. If you have already submitted it, just open Week 1.</div><a class="week-prereq-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_datypSg3OgimB6K" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open onboarding survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </summary>
 <div class="tasks-container">
 <div class="task">
@@ -1343,6 +1391,7 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
+<div class="week-prereq"><span class="week-prereq-badge" aria-hidden="true">1st</span><div class="week-prereq-body"><strong>Before you start Week 1:</strong> please complete the AI Canvas Beta onboarding survey first (about 5 minutes). It captures your baseline so we can measure how Week 1 changes the picture. If you have already submitted it, just open Week 1.</div><a class="week-prereq-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_datypSg3OgimB6K" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open onboarding survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </summary>
 <div class="tasks-container">
 <div class="task">
