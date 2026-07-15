@@ -478,6 +478,34 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
     .howto-grid { grid-template-columns: 1fr; gap: 18px; }
 }
 
+
+/* Survey pointer banner inside each week's task preview */
+.survey-pointer {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 14px;
+    margin: 0 0 22px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, rgba(237,20,125,0.08) 0%, rgba(155,13,218,0.05) 100%);
+    border: 1px solid rgba(237,20,125,0.25);
+    border-left: 4px solid var(--pink);
+    border-radius: 10px;
+}
+.survey-pointer-body { flex: 1; min-width: 240px; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+.survey-pointer-body strong { color: var(--pink); font-weight: 700; }
+.survey-pointer-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px;
+    background: var(--gradient-warm);
+    color: white; text-decoration: none;
+    font-size: 13.5px; font-weight: 600;
+    border-radius: 8px; white-space: nowrap;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.survey-pointer-link:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.survey-pointer-link svg { width: 14px; height: 14px; }
+/* Preview task rows: title + time only on the hub; full instructions live in the survey */
+.tasks-preview-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 14px; }
+.task { padding-bottom: 14px; margin-bottom: 14px; }
 </style>
 </head>
 <body>
@@ -485,7 +513,7 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <nav class="topbar">
     <div class="topbar-inner">
         <div class="brand"><span class="brand-dot"></span>AI Canvas in Splunk - Beta - Task Hub</div>
-        <div class="topbar-meta">3 tracks &middot; 4 weeks &middot; 12 surveys live</div>
+        <div class="topbar-meta">3 tracks &middot; 4 weeks &middot; 12 task sets</div>
     </div>
 </nav>
 
@@ -600,24 +628,24 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
         <div class="eyebrow">Weekly tasks for your beta track</div>
         <h1>Weekly tasks for <span class="accent">your beta track</span>.</h1>
         <p class="hero-sub">
-            Find your track below. Each week is collapsed into a short card &mdash; click anywhere
-            on a card to expand it and see that week&rsquo;s tasks. You can open the survey
-            directly from the card&rsquo;s <strong>Open Week N survey</strong> button without
-            expanding. The tasks deliberately don&rsquo;t hand you example prompts &mdash; we want
-            to see how you naturally phrase the work to AI Canvas. In Weeks 1 and 2, the free
-            exploration task is the <em>last</em> task &mdash; you&rsquo;ll warm up on the
-            structured tasks first, then drive your own exploration. In the survey, each
-            task&rsquo;s instructions and its feedback questions are on separate pages: click
-            <em>Next</em> after working a task to answer a few short questions about how it went.
+            Find your track below. Each week is a short <strong>preview</strong> card. Expand it to
+            see what that week covers at a glance. <strong>The task instructions aren&rsquo;t on this
+            hub.</strong> They open when you hit the <strong>Open Week N tasks</strong> button on
+            each card, which is where you read every task in full and complete it. The tasks
+            deliberately don&rsquo;t hand you example prompts &mdash; we want to see how you
+            naturally phrase the work to AI Canvas. Inside, each task&rsquo;s instructions and its
+            feedback questions are on separate pages: click <em>Next</em> after working a task to
+            answer a few short questions about how it went.
         </p>
         <div class="confidence-banner">
-            <h4>How this hub works</h4>
+            <h4>Where the tasks live</h4>
             <p>
-                Pick your track tab. Each week is a collapsible card &mdash; click to expand and see
-                the tasks, or jump straight into the survey from the <strong>Open Week N
-                survey</strong> button on the card. The survey holds the same content as this hub
-                plus the per-task feedback questions. The Master Task Guide DOCX in your kit
-                mirrors this hub and is fine for offline reference.
+                This hub is a <strong>preview</strong>: it shows which weeks exist and what each one
+                covers, but not the task instructions themselves. To see and complete the actual
+                tasks, hit the <strong>Open Week N tasks</strong> button on the week card. Each one
+                carries that week&rsquo;s full task instructions plus the feedback questions. The
+                Master Task Guide DOCX in your kit also mirrors the full task instructions for
+                offline reference.
             </p>
         </div>
     </div>
@@ -643,27 +671,21 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_4HEYj9H8G6aZwzQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_4HEYj9H8G6aZwzQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 <div class="week-prereq"><span class="week-prereq-badge" aria-hidden="true">1st</span><div class="week-prereq-body"><strong>Before you start Week 1:</strong> please complete the AI Canvas Beta onboarding survey first (about 5 minutes). It captures your baseline so we can measure how Week 1 changes the picture. If you have already submitted it, just open Week 1.</div><a class="week-prereq-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_datypSg3OgimB6K" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open onboarding survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 1 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Generate SPL for a known issue</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to surface recent errors in a part of your environment you administer or care about.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open a new AI Canvas. Ask it - in your own words - to help you look at the errors happening in a part of your environment you care about. You decide the scope, the time window, and how you want the results broken down.</div>
 </div>
 </div>
 <div class="task">
@@ -673,14 +695,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to spot indexes or sources whose log volume looks unusual right now versus a recent baseline.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open a new AI Canvas. Describe the volume question in your own words. You pick the baseline window that&#x27;s meaningful for your environment (a day, a week, a month) and the threshold for what counts as unusual.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -688,14 +702,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Drill back to raw events</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Take any AI-generated summary card in your canvas and drill back to the raw events behind it. Confirm the summary matches reality.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">From any of the cards in your canvas, click into the underlying events or ask the agent to show you the raw events that produced the summary. Scan the events. Return to the prior canvas view.</div>
 </div>
 </div>
 <div class="task">
@@ -705,16 +711,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="task-free-badge">Free exploration</span>
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Spend 15 uninterrupted minutes using AI Canvas the way you would naturally use it for an observability question you have today. Pick an index, service, deployment, or recent incident and just try it.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Start a new canvas. Type a natural-language question about something in your environment you actually care about. Let the agent respond. Repeat with a follow-up prompt if you want.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_4HEYj9H8G6aZwzQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -727,26 +728,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_afJE1vnMw0XGUe2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_afJE1vnMw0XGUe2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 2 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Multi-step error-to-deploy correlation</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to find your noisiest service right now and then look for a deployment, config change, or other change event nearby that might explain it.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Start a new canvas. Describe the two-step investigation in your own words. You pick the time window, the data sources for change events (CI/CD logs, deploy notes, ticket index, whatever your team uses), and the definition of noisy.</div>
 </div>
 </div>
 <div class="task">
@@ -756,14 +751,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Build a search through the agent, then refine it across 3-4 follow-up turns. We want to see how it holds context.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Ask AI Canvas questions about errors or activity in a service or index you care about. Then push it through at least three follow-up turns - narrowing time, changing how it&#x27;s grouped, adding or removing a filter. Phrase each follow-up however feels natural; the point is not the words but whether the agent keeps cumulative context.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -771,14 +758,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Validate AI output against raw</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick the most surprising or interesting result from this week&#x27;s tasks and validate it against raw data.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Find a result from the previous tasks that seemed off, or unexpected, or just worth confirming. Drill back to raw events. Read at least 5 actual events. Decide whether the AI&#x27;s summary was accurate.</div>
 </div>
 </div>
 <div class="task">
@@ -788,16 +767,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="task-free-badge">Free exploration</span>
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Spend 15 minutes trying any agentic workflow you&#x27;d use for routine ops. Multi-step, follow-up prompts, agent-proposed next steps - anything that goes beyond a single Q-and-A.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a routine ops task: triage a noisy host, follow up on a recent deploy, check the health of a service. Use AI Canvas as your investigation surface. Use follow-up prompts liberally.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_afJE1vnMw0XGUe2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -810,26 +784,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">5 tasks</span><span class="pill">~65 min</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_cXXMvWq0i2CZYsS" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_cXXMvWq0i2CZYsS" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 3 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Cross-source correlation</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Ask AI Canvas to correlate evidence across two or more indexes/sourcetypes (e.g., application logs + infra metrics, or app errors + access logs).</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">In a new canvas, ask the agent to investigate a scenario that requires looking at two distinct data sources in your environment. Look for whether the agent stitches the evidence into one narrative.</div>
 </div>
 </div>
 <div class="task">
@@ -839,14 +807,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">If you have ITSI installed, ask AI Canvas to query data inside your ITSI indexes. Important: AI Canvas can read ITSI indexes but cannot interact with ITSI episodes or invoke ITSI&#x27;s AI skills in the beta - this task is read-only against ITSI&#x27;s underlying data.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">If you don&#x27;t have ITSI, skip this task and mark it &#x27;Skipped&#x27; in the feedback. If you do, ask the agent to query something straightforward from your ITSI indexes.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -854,14 +814,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Compose a dashboard panel via agent</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Ask AI Canvas to draft and compose a dashboard panel you would actually use.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Describe a complex recent use case in plain language. Have the agent compose it. Iterate until you&#x27;d be willing to save it in an existing dashboard.</div>
 </div>
 </div>
 <div class="task">
@@ -871,14 +823,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Start where you&#x27;d normally start - In Dashboard Studio dashboard, Alert with triggered results or from a saved Report - then bring that result into AI Canvas to keep investigating with the agent.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open a saved Report or a dashboard you already use. Send the result or dashboard panel into AI Canvas - use whatever in-product affordance is exposed for adding the report&#x27;s results to a canvas. Once it&#x27;s in the canvas, ask the agent follow-up questions to extend the investigation. If you can&#x27;t find the affordance, capture that as feedback and try copying the SPL or describing the result in a new canvas as a fallback.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -887,16 +831,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Take a canvas you&#x27;ve worked in this week and turn it into a report you&#x27;d actually use as a work artifact - then download it.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a canvas from this week that has work worth saving. Generate and download a report from your canvas. Once you are done, record (and then summarize below) your feedback on how easy or hard it was to generate a report, on the report itself, how you would use it, for what purpose, and where you would save it.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_cXXMvWq0i2CZYsS" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -909,26 +848,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">5 tasks</span><span class="pill">~75 min</span><span class="pill">Final SUS + exit feedback</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_8eqk9XygIHhf0a2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_8eqk9XygIHhf0a2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 4 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Real-incident-style multi-prompt investigation</h4>
 
 <span class="task-time">20 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick a real ops question from your queue or recent history and investigate it end-to-end in AI Canvas. Use as many prompts as needed.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Choose a question you would actually have to answer this week (a real ticket, a recent incident, a performance question). Use AI Canvas as your investigation surface from start to finish. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
 </div>
 </div>
 <div class="task">
@@ -938,14 +871,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Get AI Canvas to recommend next investigation steps based on what&#x27;s already in your canvas, and decide which ones you&#x27;d actually act on.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Continuing from a previous task (or in a fresh canvas with some results in it), ask AI Canvas in your own words to recommend where to look next. For each suggestion it gives, decide: would you actually do that? Capture your reasoning in a notepad alongside.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -953,14 +878,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Manual versus agentic comparison</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Take a question you&#x27;ve already answered manually this week and ask AI Canvas the same question. Compare time-to-answer, accuracy, and confidence.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a recent investigation where you already know the answer. Ask AI Canvas the same question fresh. Time how long it takes. Compare its answer to yours.</div>
 </div>
 </div>
 <div class="task">
@@ -970,14 +887,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">If another member of your team is also in the beta, collaborate with them on a canvas. Pick something you&#x27;d normally work through together.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a task you&#x27;d normally tackle with a teammate. Ask another team member who&#x27;s also in the beta to join you, then share your canvas with them: copy the canvas link and send it to them. Work the task together in the shared canvas. If no teammate is available, skip this task and mark it &#x27;Skipped&#x27; in the feedback.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -986,16 +895,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Capture anything that bothered you, surprised you, or would block you from using AI Canvas in real work.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Think aloud and be specific - &#x27;the SPL was wrong&#x27; is less useful than &#x27;the SPL used eventtype= when there&#x27;s no eventtype in my data, and it didn&#x27;t recover when I told it that&#x27;. Once you are done recording your final feedback, enter a summary of your feedback below.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_8eqk9XygIHhf0a2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 <div class="sus-notice"><strong>System Usability Scale (SUS).</strong> Week 4 closes with the standard 10-item SUS questionnaire so we can benchmark AI Canvas against industry usability norms. About 5 minutes.</div>
 </div>
 </details>
@@ -1015,27 +919,21 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_80a6Hu4RD7ANaCO" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_80a6Hu4RD7ANaCO" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 <div class="week-prereq"><span class="week-prereq-badge" aria-hidden="true">1st</span><div class="week-prereq-body"><strong>Before you start Week 1:</strong> please complete the AI Canvas Beta onboarding survey first (about 5 minutes). It captures your baseline so we can measure how Week 1 changes the picture. If you have already submitted it, just open Week 1.</div><a class="week-prereq-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_datypSg3OgimB6K" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open onboarding survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 1 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">License usage trend</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to summarize recent license usage trends for your environment.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">In your own words, ask AI Canvas to help you look at license consumption over a recent window.</div>
 </div>
 </div>
 <div class="task">
@@ -1045,14 +943,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to find indexes whose size or event count looks off versus their normal pattern.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Ask AI Canvas - in your own words - to help you find indexes that look off. You decide the baseline and what counts as significant change.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1060,14 +950,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Drill back from a summary</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick a summary card from the previous tasks and drill back to verify the underlying data.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">From any card in your canvas, drill into the raw events or look at the SPL the agent used. Confirm the summary matches.</div>
 </div>
 </div>
 <div class="task">
@@ -1077,16 +959,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="task-free-badge">Free exploration</span>
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Spend 15 minutes using AI Canvas the way you&#x27;d naturally use it for an admin question. Pick any admin question you have today.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open AI Canvas. Type an admin-flavored question - license usage, index health, search performance, user activity, anything.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_80a6Hu4RD7ANaCO" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -1099,26 +976,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3QML9cHmOlxXY6G" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3QML9cHmOlxXY6G" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 2 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Search head or indexer health investigation</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to investigate the health of your search heads or indexers right now.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Ask AI Canvas in your own words to help you check on search head or indexer health. You pick which tier you want to look at and which dimensions matter to you (queues, concurrency, CPU, memory, disk - whatever you usually watch).</div>
 </div>
 </div>
 <div class="task">
@@ -1128,14 +999,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to surface saved searches that look stale - haven&#x27;t run recently, or have been failing.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Describe the audit you want in your own words. You decide what counts as stale (30 days, 60 days, never succeeded) and what you want to see (owners, apps, last-run timestamp).</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1143,14 +1006,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Iterate on an admin search</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Build an admin search through the agent and refine it across 3 follow-up turns.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open a new canvas. Ask an opening admin question - could be about user activity, search performance, schedule load, anything. Then push it through three follow-ups, narrowing or pivoting however feels natural. Phrase the follow-ups however you would in a real investigation.</div>
 </div>
 </div>
 <div class="task">
@@ -1160,16 +1015,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="task-free-badge">Free exploration</span>
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Spend 15 minutes trying an agentic workflow you would use for routine admin work. Multi-step, follow-ups, agent-proposed next steps.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a routine admin task: license audit, indexer health, capacity check. Use AI Canvas with follow-up prompts liberally.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3QML9cHmOlxXY6G" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -1182,26 +1032,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">5 tasks</span><span class="pill">~70 min</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1Mm1qw045n1fzts" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1Mm1qw045n1fzts" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 3 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Capacity forecasting</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to project a capacity trend into the near future based on recent data.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Describe the capacity question you actually have today (license, disk, ingest, something else) and the horizon you care about. Ask AI Canvas to forecast it. Look at the method and the uncertainty as much as the number.</div>
 </div>
 </div>
 <div class="task">
@@ -1211,14 +1055,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Start where you&#x27;d normally start - In Dashboard Studio dashboard, Alert with triggered results or from a saved Report - then bring that result into AI Canvas to keep investigating with the agent.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open a saved Report or a dashboard you already use. Send the result or dashboard panel that shows something interesting right now into AI Canvas - use whatever in-product affordance is exposed for adding the report&#x27;s results or panel to a canvas. Once it&#x27;s in the canvas, ask the agent follow-up questions to dig in. If you can&#x27;t find the affordance, capture that as feedback and try copying the SPL or describe the panel to a new canvas as a fallback.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1226,14 +1062,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Dashboard draft for index health</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Ask AI Canvas to draft a dashboard (panels and SPL) for daily index-health monitoring. Don&#x27;t necessarily save it - we&#x27;re testing the drafting flow.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Describe a dashboard you&#x27;d want for daily index health. Have the agent compose panels. Iterate.</div>
 </div>
 </div>
 <div class="task">
@@ -1243,14 +1071,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Start where you&#x27;d normally start - on a triggered alert - then bring that alert into AI Canvas to keep investigating with the agent.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open a recently triggered alert (one from your platform monitoring or from any saved alert your team uses). Send the alert&#x27;s context into AI Canvas - use whatever in-product affordance is exposed for adding the alert to a canvas. Once it&#x27;s in the canvas, ask the agent follow-up questions to investigate. If you can&#x27;t find the affordance, capture that as feedback and describe the alert manually in a new canvas as a fallback.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1259,16 +1079,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Take a canvas you&#x27;ve worked in this week and turn it into a report you&#x27;d actually use as a work artifact - then download it.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a canvas from this week that has work worth saving. Generate and download a report from your canvas. Once you are done, record (and then summarize below) your feedback on how easy or hard it was to generate a report, on the report itself, how you would use it, for what purpose, and where you would save it.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1Mm1qw045n1fzts" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -1281,26 +1096,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">5 tasks</span><span class="pill">~75 min</span><span class="pill">Final SUS + exit feedback</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3l8KQCVvQGFgYmi" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3l8KQCVvQGFgYmi" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 4 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Real admin investigation in your environment</h4>
 
 <span class="task-time">20 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick a real admin question from your queue and investigate it end-to-end in AI Canvas.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Use AI Canvas as your investigation surface. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
 </div>
 </div>
 <div class="task">
@@ -1310,14 +1119,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Ask AI Canvas to propose remediation for an admin issue you&#x27;ve identified.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Take a finding from a previous task (or a known admin issue). Ask the agent what it would recommend. Walk through each proposal with a critical eye - look at what evidence the agent cites and whether the recommendation would actually work in your environment.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1325,14 +1126,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Manual versus agentic comparison</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick an admin question you already answered manually this week and ask AI Canvas the same question. Compare time-to-answer, accuracy, and confidence.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Use a recent question where you already know the answer. Ask AI Canvas the same question fresh. Time how long it takes. Compare its answer to yours.</div>
 </div>
 </div>
 <div class="task">
@@ -1342,14 +1135,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">If another member of your team is also in the beta, collaborate with them on a canvas. Pick something you&#x27;d normally work through together.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a task you&#x27;d normally tackle with a teammate. Ask another team member who&#x27;s also in the beta to join you, then share your canvas with them: copy the canvas link and send it to them. Work the task together in the shared canvas. If no teammate is available, skip this task and mark it &#x27;Skipped&#x27; in the feedback.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1358,16 +1143,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Capture anything that bothered you, surprised you, or would block you from using AI Canvas in real work.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Think aloud and be specific - &#x27;the SPL was wrong&#x27; is less useful than &#x27;the SPL didn&#x27;t filter by index, so it ran against everything and the cost concerned me&#x27;. Once you are done recording your final feedback, enter a summary of your feedback below.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_3l8KQCVvQGFgYmi" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 <div class="sus-notice"><strong>System Usability Scale (SUS).</strong> Week 4 closes with the standard 10-item SUS questionnaire so we can benchmark AI Canvas against industry usability norms. About 5 minutes.</div>
 </div>
 </details>
@@ -1387,27 +1167,21 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_0IMNC8EequlZq4u" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_0IMNC8EequlZq4u" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 <div class="week-prereq"><span class="week-prereq-badge" aria-hidden="true">1st</span><div class="week-prereq-body"><strong>Before you start Week 1:</strong> please complete the AI Canvas Beta onboarding survey first (about 5 minutes). It captures your baseline so we can measure how Week 1 changes the picture. If you have already submitted it, just open Week 1.</div><a class="week-prereq-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_datypSg3OgimB6K" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open onboarding survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a></div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 1 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Alert triage</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Use AI Canvas to help you triage what&#x27;s high-severity in your environment right now.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">In your own words, ask AI Canvas to surface the high-severity activity worth your attention. You decide what &#x27;high-severity&#x27; means in your environment, what time window to look at, and how you want it broken down.</div>
 </div>
 </div>
 <div class="task">
@@ -1417,14 +1191,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick one entity (user, IP, domain, host) from a previous task and use AI Canvas to build context around it.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick an entity. Ask AI Canvas - however you&#x27;d ask a teammate - to help you understand what&#x27;s happening with that entity. You decide what context matters (recent activity, associations, geo, history).</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1432,14 +1198,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Drill back from a summary</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Take any AI-generated summary from this week and validate it against raw events.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Drill back from a summary card to raw events. Read the actual events. Decide whether the summary is accurate.</div>
 </div>
 </div>
 <div class="task">
@@ -1449,16 +1207,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="task-free-badge">Free exploration</span>
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Spend 15 minutes using AI Canvas to investigate a recent alert, event, or hunch in your environment.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Open AI Canvas. Pick an alert from your queue or a recent investigation question. Type a natural-language prompt.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_0IMNC8EequlZq4u" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 1 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -1471,26 +1224,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Includes free exploration</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_79uWzYrXpNLFIb4" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_79uWzYrXpNLFIb4" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 2 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Multi-step alert triage</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick one high-severity alert and let AI Canvas chain through multiple queries to build full triage context for you.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a high-severity alert from your queue (whatever you&#x27;d actually triage today). Ask AI Canvas to help you triage it - phrase it however you would naturally describe the work to a teammate. Use follow-ups to push the agent deeper where you&#x27;d normally dig.</div>
 </div>
 </div>
 <div class="task">
@@ -1500,14 +1247,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Have AI Canvas draft a written response plan for the entity or finding from your earlier tasks. Nothing is executed - this is a written narrative grounded in evidence from your canvas.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick an entity or finding from a previous task. Ask the agent to draft a recommended response plan in its own words. You decide what to include - containment ideas, monitoring next steps, who to loop in, what evidence is still missing. Read the plan, then ask follow-ups to sharpen it.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1515,14 +1254,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Reference an AI suggestion&#x27;s underlying evidence</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">For any AI-generated suggestion or finding, confirm you can see the evidence behind it.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a suggestion from the previous tasks. Ask the agent to show the evidence and reasoning. Drill into raw data to confirm.</div>
 </div>
 </div>
 <div class="task">
@@ -1532,16 +1263,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <span class="task-free-badge">Free exploration</span>
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Spend 15 minutes trying an agentic threat-hunting prompt. Multi-step, exploratory, hypothesis-driven.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a threat hypothesis you&#x27;ve been wanting to investigate. Use follow-up prompts to refine. Let the agent propose where to look next.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_79uWzYrXpNLFIb4" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 2 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -1554,26 +1280,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">5 tasks</span><span class="pill">~65 min</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1zgKHm72yDcLMZU" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1zgKHm72yDcLMZU" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 3 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Multi-source security correlation</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Ask AI Canvas to correlate evidence across at least two security data sources (e.g., auth + endpoint, or network + identity).</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pose a question that requires looking at two distinct data sources. Look for whether the agent ties them together meaningfully.</div>
 </div>
 </div>
 <div class="task">
@@ -1583,14 +1303,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Kick off an enrichment that takes a while to return (e.g., a 30-day historical lookup or a wide IOC sweep). Use the canvas to track it while you work on something else.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Start a long search. While it runs, ask the agent another question in the same canvas. Observe both step statuses.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1598,14 +1310,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Agent proposes next investigation steps</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Get AI Canvas to recommend next investigation steps based on the evidence already in your canvas, and decide which you&#x27;d act on.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Ask AI Canvas - in your own words - to recommend where to look next. For each suggestion, engage critically: would you actually do that, and why or why not?</div>
 </div>
 </div>
 <div class="task">
@@ -1615,14 +1319,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Test how easily you can resume an investigation by re-opening a canvas you&#x27;ve already worked in this week, using canvas history and the agent&#x27;s ability to re-orient you.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Close any active canvas you&#x27;ve been working in this week. Re-open it the way you would tomorrow morning - locate it from your canvas history, then ask the agent to summarize what&#x27;s there and what you were investigating. Decide whether you have enough to keep going, or whether you&#x27;d rather start fresh.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1631,16 +1327,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Take a canvas you&#x27;ve worked in this week and turn it into a report you&#x27;d actually use as a work artifact - then download it.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a canvas from this week that has work worth saving. Generate and download a report from your canvas. Once you are done, record (and then summarize below) your feedback on how easy or hard it was to generate a report, on the report itself, how you would use it, for what purpose, and where you would save it.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_1zgKHm72yDcLMZU" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 3 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 </div>
 </details>
 <details class="week-section">
@@ -1653,26 +1344,20 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <div class="week-meta-row"><span class="pill">4 tasks</span><span class="pill">~60 min</span><span class="pill">Final SUS + exit feedback</span></div>
 </div>
 <div class="week-header-right">
-<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_7UNKk1nLN0MFXlI" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 survey<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+<a class="survey-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_7UNKk1nLN0MFXlI" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 <span class="week-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
 </div>
 </div>
 </summary>
 <div class="tasks-container">
+<p class="tasks-preview-label">Preview &mdash; Week 4 tasks</p>
+
 <div class="task">
 <div class="task-header">
 <div class="task-number">1</div>
 <h4 class="task-title">Full incident-style investigation</h4>
 
 <span class="task-time">20 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick a recent or active investigation and run it end-to-end in AI Canvas.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Use AI Canvas as your full investigation surface. Drive it with multi-turn prompts, drill back, flag findings, propose next steps. Try to stay in AI Canvas as long as it&#x27;s useful - we want to see where it falls short before you reach for manual SPL.</div>
 </div>
 </div>
 <div class="task">
@@ -1682,14 +1367,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">15 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Pick a recent investigation you ran manually this week and ask AI Canvas the same question. Compare time-to-answer, accuracy, and confidence.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a recent investigation where you already know the answer. Ask AI Canvas the same question fresh. Time how long it takes. Compare its answer to yours.</div>
-</div>
 </div>
 <div class="task">
 <div class="task-header">
@@ -1697,14 +1374,6 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 <h4 class="task-title">Optional - Collaborate on a canvas with a teammate</h4>
 
 <span class="task-time">15 min</span>
-</div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">If another member of your team is also in the beta, collaborate with them on a canvas. Pick something you&#x27;d normally work through together.</div>
-</div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Pick a task you&#x27;d normally tackle with a teammate. Ask another team member who&#x27;s also in the beta to join you, then share your canvas with them: copy the canvas link and send it to them. Work the task together in the shared canvas. If no teammate is available, skip this task and mark it &#x27;Skipped&#x27; in the feedback.</div>
 </div>
 </div>
 <div class="task">
@@ -1714,16 +1383,11 @@ footer .footer-meta { margin-top: 6px; font-size: 12px; }
 
 <span class="task-time">10 min</span>
 </div>
-<div class="task-block">
-<div class="task-block-label">Goal</div>
-<div class="task-block-body">Capture anything that bothered you, surprised you, or would block you from using AI Canvas in real work.</div>
 </div>
-<div class="task-block">
-<div class="task-block-label">Instructions</div>
-<div class="task-block-body">Think aloud and be specific - for example: &#x27;the agent confidently said X but the evidence said Y&#x27; etc. Once you are done recording your final feedback, enter a summary of your feedback below.</div>
+<div class="survey-pointer">
+<div class="survey-pointer-body"><strong>The tasks for this week aren&rsquo;t shown on this hub.</strong> This card only previews what the week covers. Use the button to open this week&rsquo;s tasks in full and complete them.</div>
+<a class="survey-pointer-link" href="https://ciscocx.qualtrics.com/jfe/form/SV_7UNKk1nLN0MFXlI" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">Open Week 4 tasks<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
 </div>
-</div>
-<div class="eow-box"><strong>End of week.</strong> The last section of the survey asks you to rate the value of this week overall and share an open-ended note about what helped or got in the way.</div>
 <div class="sus-notice"><strong>System Usability Scale (SUS).</strong> Week 4 closes with the standard 10-item SUS questionnaire so we can benchmark AI Canvas against industry usability norms. About 5 minutes.</div>
 </div>
 </details>
